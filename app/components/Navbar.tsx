@@ -60,13 +60,13 @@ function Sidebar() {
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div>
+        <div className="z-50">
           <Link
             href="/"
-            className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+            className="flex items-center p-2 bg-gray-50 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             onClick={toggleSidebar}
           >
-            Health Management System
+            <span className="text-3xl px-5">Health Management System</span>
           </Link>
           <hr />
         </div>
