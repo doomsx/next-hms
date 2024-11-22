@@ -78,7 +78,7 @@ function Sidebar() {
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
                 onClick={toggleSidebar}
               >
-                <span className="ml-3">Home</span>
+                <span className="ml-3 text-base md:text-lg">Home</span>
               </Link>
             </li>
             <li>
@@ -87,7 +87,7 @@ function Sidebar() {
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
                 onClick={toggleSidebar}
               >
-                <span className="ml-3">Employees</span>
+                <span className="ml-3 text-base md:text-lg">Employees</span>
               </Link>
             </li>
             <li>
@@ -96,7 +96,7 @@ function Sidebar() {
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
                 onClick={toggleSidebar}
               >
-                <span className="ml-3">Vaccines</span>
+                <span className="ml-3 text-base md:text-lg">Vaccines</span>
               </Link>
             </li>
             <li>
@@ -105,7 +105,7 @@ function Sidebar() {
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
                 onClick={toggleSidebar}
               >
-                <span className="ml-3">Medicines</span>
+                <span className="ml-3 text-base md:text-lg">Medicines</span>
               </Link>
             </li>
             <li>
@@ -114,7 +114,9 @@ function Sidebar() {
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
                 onClick={toggleSidebar}
               >
-                <span className="ml-3">Annual Physical Examination</span>
+                <span className="ml-3 text-base md:text-lg">
+                  Annual Physical Examination
+                </span>
               </Link>
             </li>
             <li>
@@ -123,7 +125,9 @@ function Sidebar() {
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
                 onClick={toggleSidebar}
               >
-                <span className="ml-3">Influenza Vaccine</span>
+                <span className="ml-3 text-base md:text-lg">
+                  Influenza Vaccine
+                </span>
               </Link>
             </li>
             {/* Add more menu items as needed */}
