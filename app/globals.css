@@ -14,7 +14,12 @@
   }
 }
 
+html{
+    @apply scroll-smooth
+}
+
 body {
+  scrollbar-width: thin;
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
