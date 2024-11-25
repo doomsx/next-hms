@@ -18,7 +18,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/compat/router";
+import { useRouter } from "next/navigation";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -29,7 +29,6 @@ function Datatable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
-  const router = useRouter();
   const [sorting, setSorting] = useState<SortingState>([]);
   const table = useReactTable({
     data,
@@ -43,9 +42,9 @@ function Datatable<TData, TValue>({
     },
   });
 
-  const handleClick = (rowData: object) => {
-    console.log(rowData);
-    router.push(`/employees/${rowData.id}`);
+  const router = useRouter();
+  const handleClick = (rowData: string) => {
+    router.push(`/employees/${rowData}`);
   };
 
   return (
@@ -76,7 +75,7 @@ function Datatable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  onClick={() => handleClick(row.original)}
+                  onClick={() => handleClick(row.id)}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
