@@ -43,8 +43,8 @@ function Datatable<TData, TValue>({
   });
 
   const router = useRouter();
-  const handleClick = (rowData: string) => {
-    router.push(`/employees/${rowData}`);
+  const handleClick = (rowData: { id: string }) => {
+    router.push(`/employees/${rowData.id}`);
   };
 
   return (
@@ -75,7 +75,7 @@ function Datatable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  onClick={() => handleClick(row.id)}
+                  onClick={() => handleClick(row.original)}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>

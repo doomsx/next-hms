@@ -5,7 +5,7 @@ import { ArrowUpDown } from "lucide-react";
 
 export type Employees = {
   id: number;
-  employeeId: number;
+  employee_id: number;
   name: string;
   age: number;
   sex: string;
@@ -27,7 +27,7 @@ export const columns: ColumnDef<Employees>[] = [
     },
   },
   {
-    accessorKey: "employeeId",
+    accessorKey: "employee_id",
     header: ({ column }) => {
       return (
         <Button
