@@ -1,6 +1,7 @@
 import React from "react";
-import Datatable from "@/app/employees/Datatable";
+const Datatable = dynamic(() => import("@/app/employees/Datatable"));
 import { columns, Employees } from "@/app/employees/columns";
+import dynamic from "next/dynamic";
 const LINK = process.env.API_LINK;
 
 type Data = {
@@ -12,12 +13,19 @@ type Data = {
   name_extn: string;
   age: number;
   sex: string;
+  status_remarks: "ACTIVE" | "INACTIVE";
 };
 
 async function getData(): Promise<Employees[]> {
   const result = await fetch(`${LINK}/users`);
   const data = await result.json();
-  const list = data.map((data: Data) => {
+
+  const filteredData = data.filter(
+    (data: { status_remarks: "ACTIVE" | "INACTIVE" }) =>
+      data.status_remarks === "ACTIVE"
+  );
+
+  const list = filteredData.map((data: Data) => {
     return {
       id: data.id,
       employee_id: data.employee_id,
