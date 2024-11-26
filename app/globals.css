@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 html {
-  @apply scroll-smooth;
+  scrollbar-width: thin;
 }
 
 body {
@@ -12,7 +12,19 @@ body {
 }
 
 .container {
-  @apply max-w-7xl mx-auto p-6;
+  @apply max-w-7xl mx-auto p-3 md:p-6;
+}
+
+.data-title {
+  @apply inline md:text-lg font-semibold md:block;
+}
+
+.data {
+  @apply w-full border-b inline md:block;
+}
+
+.data-divider {
+  @apply flex flex-col md:flex-row gap-2 md:gap-20 md:px-10;
 }
 
 @layer base {

@@ -16,7 +16,7 @@ type Data = {
   status_remarks: "ACTIVE" | "INACTIVE";
 };
 
-async function getData(): Promise<Employees[]> {
+export async function getData(): Promise<Employees[]> {
   const result = await fetch(`${LINK}/users`);
   const data = await result.json();
 
@@ -25,19 +25,17 @@ async function getData(): Promise<Employees[]> {
       data.status_remarks === "ACTIVE"
   );
 
-  const list = filteredData.map((data: Data) => {
+  return filteredData.map((data: Data) => {
     return {
       id: data.id,
       employee_id: data.employee_id,
-      name: `${data.last_name}, ${data.first_name} ${data.middle_name} ${
-        data.name_extn === "N/A" ? "" : data.name_extn
-      }`,
+      name: `${data.last_name}, ${data.first_name} ${
+        data.middle_name === "N/A" ? "" : data.middle_name
+      } ${data.name_extn === "N/A" ? "" : data.name_extn}`,
       age: data.age,
       sex: data.sex,
     };
   });
-
-  return list;
 }
 
 const page = async () => {
