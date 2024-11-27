@@ -1,7 +1,6 @@
-import React from "react";
+import dynamic from "next/dynamic";
 const Datatable = dynamic(() => import("@/app/employees/Datatable"));
 import { columns, Employees } from "@/app/employees/columns";
-import dynamic from "next/dynamic";
 const LINK = process.env.API_LINK;
 
 type Data = {
@@ -38,7 +37,7 @@ export async function getData(): Promise<Employees[]> {
   });
 }
 
-const page = async () => {
+const Page = async () => {
   const data = await getData();
   return (
     <>
@@ -50,4 +49,4 @@ const page = async () => {
   );
 };
 
-export default page;
+export default Page;
