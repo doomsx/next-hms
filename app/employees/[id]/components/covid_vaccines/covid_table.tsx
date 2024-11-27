@@ -19,16 +19,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
-function Datatable<TData, TValue>({
+function Covid_Table<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
@@ -50,19 +50,14 @@ function Datatable<TData, TValue>({
     },
   });
 
-  const router = useRouter();
-  const handleClick = (rowData: { id: string }) => {
-    router.push(`/employees/${rowData.id}`);
-  };
-
   return (
     <div>
       <div className="flex items-center py-4">
         <Input
-          placeholder="Search by name"
-          value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
+          placeholder="Search by brand"
+          value={(table.getColumn("brand")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("name")?.setFilterValue(event.target.value)
+            table.getColumn("brand")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
@@ -93,7 +88,6 @@ function Datatable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  onClick={() => handleClick(row.original)}
                   className="cursor-pointer"
                 >
                   {row.getVisibleCells().map((cell) => (
@@ -141,4 +135,4 @@ function Datatable<TData, TValue>({
   );
 }
 
-export default Datatable;
+export default Covid_Table;

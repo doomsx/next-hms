@@ -8,7 +8,7 @@ type Data = {
   employee_id: number;
   first_name: string;
   last_name: string;
-  middle_name: string;
+middle_name: string;
   name_extn: string;
   age: number;
   sex: string;

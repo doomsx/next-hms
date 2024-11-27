@@ -1,16 +1,17 @@
 import React from "react";
 import { Separator } from "@radix-ui/react-separator";
-import Personal_Information from "./Personal_Information";
-import Medical_Health_status from "./Medical_Health_status";
-import Covid_Vaccines from "./Covid_Vaccines";
-import Other_Vaccines from "./Other_Vaccines";
-import Chief_Complaints from "./Chief_Complaints";
-import Vital_Signs from "./Vital_Signs";
-import Height_and_Weight from "./Height_and_Weight";
-import Diagnosis_and_Treatment_Plan from "./Diagnosis_and_Treatment_Plan";
+import Personal_Information from "./components/personal_information/Personal_Information";
+import Medical_Health_status from "./components/medical_health_status/Medical_Health_status";
+import Covid_Vaccines from "./components/covid_vaccines/Covid_Vaccines";
+import Other_Vaccines from "./components/other_vaccines/Other_Vaccines";
+import Chief_Complaints from "./components/chief_complaints/Chief_Complaints";
+import Vital_Signs from "./components/vital_signs/Vital_Signs";
+import Height_and_Weight from "./components/height_and_weight/Height_and_Weight";
+import Diagnosis_and_Treatment_Plan from "./components/diagnosis_and_treatment_plan/Diagnosis_and_Treatment_Plan";
 const LINK = process.env.API_LINK;
 
-const page = async ({ params }: { params: { id: string } }) => {
+const page = async (props: { params: Promise<{ id: string }> }) => {
+  const params = await props.params;
   const id = await params.id;
   const response = await fetch(`${LINK}/users/${id}`);
   const data = await response.json();
@@ -30,7 +31,7 @@ const page = async ({ params }: { params: { id: string } }) => {
         <Separator orientation="vertical" />
         <Medical_Health_status medData={medData} />
         <Separator orientation="vertical" />
-        <Covid_Vaccines />
+        <Covid_Vaccines id={id} />
         <Separator orientation="vertical" />
         <Other_Vaccines />
         <Separator orientation="vertical" />
