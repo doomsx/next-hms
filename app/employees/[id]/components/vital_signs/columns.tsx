@@ -10,13 +10,17 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-type covid_type = {
+type vital_type = {
   id: number;
   date: string;
-  brand: string;
+  bloodPressure: string;
+  heartRate: number;
+  oxygenSaturation: number;
+  respiratoryRate: number;
+  temperature: number;
 };
 
-export const covid: ColumnDef<covid_type>[] = [
+export const vital: ColumnDef<vital_type>[] = [
   {
     accessorKey: "id",
     header: ({ column }) => {
@@ -46,14 +50,70 @@ export const covid: ColumnDef<covid_type>[] = [
     },
   },
   {
-    accessorKey: "brand",
+    accessorKey: "bloodPressure",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Brand
+          Blood Pressure
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "heartRate",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Heart Rate
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "oxygenSaturation",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Oxygen Saturation
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "respiratoryRate",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Respiratory Rate
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "temperature",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Temperature
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -62,7 +122,7 @@ export const covid: ColumnDef<covid_type>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const covid = row.original;
+      const vital = row.original;
 
       return (
         <DropdownMenu>
@@ -74,10 +134,10 @@ export const covid: ColumnDef<covid_type>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => console.log(`Edit ${covid.id}`)}>
+            <DropdownMenuItem onClick={() => console.log(`Edit ${vital.id}`)}>
               Edit
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => console.log(`Delete ${covid.id}`)}>
+            <DropdownMenuItem onClick={() => console.log(`Delete ${vital.id}`)}>
               Delete
             </DropdownMenuItem>
           </DropdownMenuContent>

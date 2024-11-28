@@ -10,13 +10,16 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-type covid_type = {
+type diag_type = {
   id: number;
   date: string;
-  brand: string;
+  diagnosis: string;
+  diagDetails: string;
+  treatmentPlan: string;
+  nurseNote: string;
 };
 
-export const covid: ColumnDef<covid_type>[] = [
+export const diag: ColumnDef<diag_type>[] = [
   {
     accessorKey: "id",
     header: ({ column }) => {
@@ -46,14 +49,56 @@ export const covid: ColumnDef<covid_type>[] = [
     },
   },
   {
-    accessorKey: "brand",
+    accessorKey: "diagnosis",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Brand
+          Diagnosis
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "diagDetails",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Diagnosis Details
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "treatmentPlan",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Treatment Plan
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "nurseNote",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Nurse's Note
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -62,7 +107,7 @@ export const covid: ColumnDef<covid_type>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const covid = row.original;
+      const diag = row.original;
 
       return (
         <DropdownMenu>
@@ -74,10 +119,10 @@ export const covid: ColumnDef<covid_type>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => console.log(`Edit ${covid.id}`)}>
+            <DropdownMenuItem onClick={() => console.log(`Edit ${diag.id}`)}>
               Edit
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => console.log(`Delete ${covid.id}`)}>
+            <DropdownMenuItem onClick={() => console.log(`Delete ${diag.id}`)}>
               Delete
             </DropdownMenuItem>
           </DropdownMenuContent>

@@ -8,8 +8,6 @@ const Covid_Vaccines = async ({ id }: { id: string }) => {
     (response) => response.json()
   );
 
-  console.log(data);
-
   return (
     <div>
       <h1 className="text-center text-xl md:text-2xl font-black">

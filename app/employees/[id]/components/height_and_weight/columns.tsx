@@ -10,13 +10,15 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-type covid_type = {
+type haw_type = {
   id: number;
   date: string;
-  brand: string;
+  height: number;
+  weight: number;
+  bmi: { bmi: number; classification: string };
 };
 
-export const covid: ColumnDef<covid_type>[] = [
+export const haw: ColumnDef<haw_type>[] = [
   {
     accessorKey: "id",
     header: ({ column }) => {
@@ -46,14 +48,42 @@ export const covid: ColumnDef<covid_type>[] = [
     },
   },
   {
-    accessorKey: "brand",
+    accessorKey: "height",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Brand
+          Height (cm)
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "weight",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Weight (kg)
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "bmi",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          BMI
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -62,7 +92,7 @@ export const covid: ColumnDef<covid_type>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const covid = row.original;
+      const haw = row.original;
 
       return (
         <DropdownMenu>
@@ -74,10 +104,10 @@ export const covid: ColumnDef<covid_type>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => console.log(`Edit ${covid.id}`)}>
+            <DropdownMenuItem onClick={() => console.log(`Edit ${haw.id}`)}>
               Edit
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => console.log(`Delete ${covid.id}`)}>
+            <DropdownMenuItem onClick={() => console.log(`Delete ${haw.id}`)}>
               Delete
             </DropdownMenuItem>
           </DropdownMenuContent>

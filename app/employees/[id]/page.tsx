@@ -33,15 +33,15 @@ const page = async (props: { params: Promise<{ id: string }> }) => {
         <Separator orientation="vertical" />
         <Covid_Vaccines id={id} />
         <Separator orientation="vertical" />
-        <Other_Vaccines />
+        <Other_Vaccines id={id} />
         <Separator orientation="vertical" />
-        <Chief_Complaints />
+        <Chief_Complaints id={id} />
         <Separator orientation="vertical" />
-        <Vital_Signs />
+        <Vital_Signs id={id} />
         <Separator orientation="vertical" />
-        <Height_and_Weight />
+        <Height_and_Weight id={id} age={data.age} sex={data.sex} />
         <Separator orientation="vertical" />
-        <Diagnosis_and_Treatment_Plan />
+        <Diagnosis_and_Treatment_Plan id={id} />
       </section>
     </div>
   );

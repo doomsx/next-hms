@@ -10,13 +10,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-type covid_type = {
+type others_type = {
   id: number;
   date: string;
+  vaccine: string;
   brand: string;
 };
 
-export const covid: ColumnDef<covid_type>[] = [
+export const others: ColumnDef<others_type>[] = [
   {
     accessorKey: "id",
     header: ({ column }) => {
@@ -46,6 +47,20 @@ export const covid: ColumnDef<covid_type>[] = [
     },
   },
   {
+    accessorKey: "vaccine",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Vaccine
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
     accessorKey: "brand",
     header: ({ column }) => {
       return (
@@ -62,7 +77,7 @@ export const covid: ColumnDef<covid_type>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      const covid = row.original;
+      const others = row.original;
 
       return (
         <DropdownMenu>
@@ -74,10 +89,12 @@ export const covid: ColumnDef<covid_type>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => console.log(`Edit ${covid.id}`)}>
+            <DropdownMenuItem onClick={() => console.log(`Edit ${others.id}`)}>
               Edit
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => console.log(`Delete ${covid.id}`)}>
+            <DropdownMenuItem
+              onClick={() => console.log(`Delete ${others.id}`)}
+            >
               Delete
             </DropdownMenuItem>
           </DropdownMenuContent>
