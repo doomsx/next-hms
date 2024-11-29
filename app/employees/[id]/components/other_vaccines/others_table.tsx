@@ -54,10 +54,10 @@ function Others_Table<TData, TValue>({
     <div>
       <div className="flex items-center py-4">
         <Input
-          placeholder="Search by brand"
-          value={(table.getColumn("brand")?.getFilterValue() as string) ?? ""}
+          placeholder="Search by vaccine"
+          value={(table.getColumn("vaccine")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("brand")?.setFilterValue(event.target.value)
+            table.getColumn("vaccine")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />

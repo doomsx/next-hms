@@ -54,10 +54,12 @@ function Diag_Table<TData, TValue>({
     <div>
       <div className="flex items-center py-4">
         <Input
-          placeholder="Search by date"
-          value={(table.getColumn("date")?.getFilterValue() as string) ?? ""}
+          placeholder="Search by diagnosis"
+          value={
+            (table.getColumn("diagnosis")?.getFilterValue() as string) ?? ""
+          }
           onChange={(event) =>
-            table.getColumn("date")?.setFilterValue(event.target.value)
+            table.getColumn("diagnosis")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
