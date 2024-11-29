@@ -1,14 +1,14 @@
 import dynamic from "next/dynamic";
 const Datatable = dynamic(() => import("@/app/employees/Datatable"));
 import { columns, Employees } from "@/app/employees/columns";
-const LINK = process.env.API_LINK;
+const LINK = process.env.NEXT_PUBLIC_API_LINK;
 
 type Data = {
   id: number;
   employee_id: number;
   first_name: string;
   last_name: string;
-middle_name: string;
+  middle_name: string;
   name_extn: string;
   age: number;
   sex: string;

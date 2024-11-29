@@ -8,7 +8,7 @@ import Chief_Complaints from "./components/chief_complaints/Chief_Complaints";
 import Vital_Signs from "./components/vital_signs/Vital_Signs";
 import Height_and_Weight from "./components/height_and_weight/Height_and_Weight";
 import Diagnosis_and_Treatment_Plan from "./components/diagnosis_and_treatment_plan/Diagnosis_and_Treatment_Plan";
-const LINK = process.env.API_LINK;
+export const LINK = process.env.NEXT_PUBLIC_API_LINK;
 
 const page = async (props: { params: Promise<{ id: string }> }) => {
   const params = await props.params;
@@ -39,7 +39,7 @@ const page = async (props: { params: Promise<{ id: string }> }) => {
         <Separator orientation="vertical" />
         <Vital_Signs id={id} />
         <Separator orientation="vertical" />
-        <Height_and_Weight id={id} age={data.age} sex={data.sex} />
+        <Height_and_Weight id={id} birthdate={data.birthdate} sex={data.sex} />
         <Separator orientation="vertical" />
         <Diagnosis_and_Treatment_Plan id={id} />
       </section>
