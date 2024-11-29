@@ -11,8 +11,23 @@ type Data = {
   middle_name: string;
   name_extn: string;
   age: number;
+  birthdate: string;
   sex: string;
   status_remarks: "ACTIVE" | "INACTIVE";
+};
+
+const calculateAge = (birthdate: string) => {
+  const today = new Date();
+  const birthDate = new Date(birthdate);
+  let age = today.getFullYear() - birthDate.getFullYear();
+  const monthDiff = today.getMonth() - birthDate.getMonth();
+  const dayDiff = today.getDate() - birthDate.getDate();
+
+  if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+    age--;
+  }
+
+  return age;
 };
 
 export async function getData(): Promise<Employees[]> {
@@ -31,7 +46,7 @@ export async function getData(): Promise<Employees[]> {
       name: `${data.last_name}, ${data.first_name} ${
         data.middle_name === "N/A" ? "" : data.middle_name
       } ${data.name_extn === "N/A" ? "" : data.name_extn}`,
-      age: data.age,
+      age: calculateAge(data.birthdate),
       sex: data.sex,
     };
   });
