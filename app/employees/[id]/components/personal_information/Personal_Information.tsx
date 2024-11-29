@@ -8,7 +8,7 @@ type Data = {
   middle_name: string;
   name_extn: string;
   birthdate: string;
-  p_block_house_lot: string;
+  p_house_block_lot: string;
   p_street: string;
   p_subdivision_village: string;
   p_barangay: string;
@@ -44,6 +44,19 @@ const Personal_Information = ({
     };
   }
 
+  const calculateAge = (birthdate: string) => {
+    const today = new Date();
+    const birthDate = new Date(birthdate);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    const dayDiff = today.getDate() - birthDate.getDate();
+
+    if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+      age--;
+    }
+
+    return age;
+  };
   return (
     <div className="space-y-3 md:space-y-10 py-3 md:py-10">
       <div className="data-divider">
@@ -65,10 +78,10 @@ const Personal_Information = ({
         <p className="data-title">Address: </p>
         <p className="data">
           {`${
-            data.p_block_house_lot === undefined ||
-            data.p_block_house_lot === "N/A"
+            data.p_house_block_lot === undefined ||
+            data.p_house_block_lot === "N/A"
               ? ""
-              : data.p_block_house_lot
+              : data.p_house_block_lot
           } 
           ${
             data.p_street === "N/A" || data.p_street === undefined
@@ -108,7 +121,7 @@ const Personal_Information = ({
 
         <div className="space-y-3 md:w-1/3">
           <p className="data-title">Age: </p>
-          <p className="data">{data.age} years old</p>
+          <p className="data">{calculateAge(data.birthdate)} years old</p>
         </div>
 
         <div className="space-y-3 md:w-1/3">
@@ -150,7 +163,9 @@ const Personal_Information = ({
       <div className="data-divider justify-center">
         <div className="space-y-3 md:w-1/3">
           <p className="data-title">Height: </p>
-          <p className="data">{data.height * 100} (cm)</p>
+          <p className="data">
+            {data.height > 3 ? data.height : data.height * 100} (cm)
+          </p>
         </div>
 
         <div className="space-y-3 md:w-1/3">

@@ -1,5 +1,5 @@
 import React from "react";
-const LINK = process.env.API_LINK;
+const LINK = process.env.NEXT_PUBLIC_API_LINK;
 import { others } from "./columns";
 import Others_Table from "./others_table";
 

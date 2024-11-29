@@ -1,5 +1,5 @@
 import React from "react";
-const LINK = process.env.API_LINK;
+const LINK = process.env.NEXT_PUBLIC_API_LINK;
 import { diag } from "./columns.";
 import Diag_Table from "./diag_table";
 

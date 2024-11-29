@@ -1,20 +1,34 @@
 import React from "react";
-const LINK = process.env.API_LINK;
+const LINK = process.env.NEXT_PUBLIC_API_LINK;
 import { haw } from "./columns";
 import Haw_Table from "./haw_table";
 
 const Height_and_Weight = async ({
   id,
-  age,
+  birthdate,
   sex,
 }: {
   id: string;
-  age: number;
+  birthdate: string;
   sex: string;
 }) => {
   const response = await fetch(`${LINK}/users/${id}/height-and-weight`).then(
     (response) => response.json()
   );
+
+  const calculateAge = (date: string) => {
+    const today = new Date();
+    const birthDate = new Date(date);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    const dayDiff = today.getDate() - birthDate.getDate();
+
+    if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+      age--;
+    }
+
+    return age;
+  };
 
   const bmiConverter = (
     height: number,
@@ -84,7 +98,7 @@ const Height_and_Weight = async ({
       const { bmi, classification } = bmiConverter(
         d.height,
         d.weight,
-        age,
+        calculateAge(birthdate),
         sex
       );
 

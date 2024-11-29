@@ -1,6 +1,6 @@
 import React from "react";
 import Chief_Table from "./chief_table";
-const LINK = process.env.API_LINK;
+const LINK = process.env.NEXT_PUBLIC_API_LINK;
 import { complaint } from "./columns";
 
 const Chief_Complaints = async ({ id }: { id: string }) => {
