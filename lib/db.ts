@@ -163,7 +163,7 @@ export const getCovidVaccines = async (id: string): Promise<covid_type[]> => {
 }
 
 export const getOtherVaccines = async (id: string): Promise<others_type[]> => {
-    const res = await fetch(`${LINK}/users/${id}/other-vaccines`).then(res => res.json())
+    const res = await fetch(`${LINK}/users/${id}/other-vaccines`)
 
     if (!res.ok) {
         throw new Error("Error fetching data")
@@ -252,7 +252,7 @@ export const getHeightAndWeight = async (id: string, sex: string, birthdate: str
 }
 
 export const getDiagnosisAndTreatmentPlan = async (id: string): Promise<diag_type[]> => {
-    const res = await fetch(`${LINK}/usersconst res = ${id}/diagnosis-and-treatment-plan`)
+    const res = await fetch(`${LINK}/users/${id}/diagnosis-and-treatment-plan`)
 
     if (!res.ok) {
         throw new Error("Error fetching data")
