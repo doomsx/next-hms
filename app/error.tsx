@@ -18,7 +18,7 @@ export default function Error({
         <div className='h-screen flex flex-col items-center justify-center'>
             <h2 className='text-3xl font-bold'>Something went wrong!</h2>
             <button
-                className='px-4 py-2 border-b border-black'
+                className='text-blue-400 underline text-lg'
                 onClick={
                     // Attempt to recover by trying to re-render the segment
                     () => reset()
