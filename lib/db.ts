@@ -98,7 +98,12 @@ export const bmiConverter = (
 };
 
 export const getUsers = async (): Promise<Employees[]> => {
-    const data = await fetch(`${LINK}/users`).then(res => res.json())
+    const response = await fetch(`${LINK}/users`)
+
+    if (!response.ok) {
+        throw new Error("Error fetching data")
+    }
+    const data = await response.json()
 
     const filteredData = data.filter(
         (data: { status_remarks: "ACTIVE" | "INACTIVE" }) =>
@@ -118,34 +123,80 @@ export const getUsers = async (): Promise<Employees[]> => {
 }
 
 export const getUserID = async (id: string) => {
-    return await fetch(`${LINK}/users/${id}`).then(res => res.json())
+    const res = await fetch(`${LINK}/users/${id}`)
+
+    if (!res.ok) {
+        throw new Error("Error fetching data")
+    }
+
+    return await res.json()
 }
 
 export const getUserEmergencyContact = async (id: string) => {
-    return await fetch(`${LINK}/users/${id}/emergency-contacts`).then(res => res.json())
+    const res = await fetch(`${LINK}/users/${id}/emergency-contacts`)
+
+    if (!res.ok) {
+        throw new Error("Error fetching data")
+    }
+
+    return await res.json()
 }
 
 export const getUserMedicalHealthStatus = async (id: string) => {
-    return await fetch(`${LINK}/users/${id}/medical-health-status`).then(res => res.json())
+    const res = await fetch(`${LINK}/users/${id}/medical-health-status`)
+
+    if (!res.ok) {
+        throw new Error("Error fetching data")
+    }
+
+    return await res.json()
 }
 
 export const getCovidVaccines = async (id: string): Promise<covid_type[]> => {
-    return await fetch(`${LINK}/users/${id}/covid-vaccines`).then(res => res.json())
+    const res = await fetch(`${LINK}/users/${id}/covid-vaccines`)
+
+    if (!res.ok) {
+        throw new Error("Error fetching data")
+    }
+
+    return await res.json()
 }
 
 export const getOtherVaccines = async (id: string): Promise<others_type[]> => {
-    return await fetch(`${LINK}/users/${id}/other-vaccines`).then(res => res.json())
+    const res = await fetch(`${LINK}/users/${id}/other-vaccines`).then(res => res.json())
+
+    if (!res.ok) {
+        throw new Error("Error fetching data")
+    }
+
+    return await res.json()
 }
 export const getChiefComplaints = async (id: string): Promise<complaint_type[]> => {
-    return await fetch(`${LINK}/users/${id}/chief-complaints`).then(res => res.json())
+    const res = await fetch(`${LINK}/users/${id}/chief-complaints`)
+
+    if (!res.ok) {
+        throw new Error("Error fetching data")
+    }
+
+    return await res.json()
 }
 export const getVitalSigns = async (id: string): Promise<vital_type[]> => {
-    return await fetch(`${LINK}/users/${id}/vital-signs`).then(res => res.json())
+    const res = await fetch(`${LINK}/users/${id}/vital-signs`)
+
+    if (!res.ok) {
+        throw new Error("Error fetching data")
+    }
+
+    return await res.json()
 }
 export const Vital_Signs = async ({ id }: { id: string }): Promise<vital_type[]> => {
-    const response = await fetch(`${LINK}/users/${id}/vital-signs`).then(
-        (response) => response.json()
-    );
+    const res = await fetch(`${LINK}/users/${id}/vital-signs`)
+
+    if (!res.ok) {
+        throw new Error("Error fetching data")
+    }
+
+    const response = await res.json()
 
     return response.map(
         (data: {
@@ -172,7 +223,14 @@ export const Vital_Signs = async ({ id }: { id: string }): Promise<vital_type[]>
 }
 
 export const getHeightAndWeight = async (id: string, sex: string, birthdate: string): Promise<haw_type[]> => {
-    const response = await fetch(`${LINK}/users/${id}/height-and-weight`).then(res => res.json())
+    const res = await fetch(`${LINK}/users/${id}/height-and-weight`)
+
+    if (!res.ok) {
+        throw new Error("Error Fetching Data")
+    }
+
+    const response = await res.json()
+
     return response.map(
         (d: { id: number; date: string; height: number; weight: number }) => {
             const { bmi, classification } = bmiConverter(
@@ -192,6 +250,13 @@ export const getHeightAndWeight = async (id: string, sex: string, birthdate: str
         }
     );
 }
+
 export const getDiagnosisAndTreatmentPlan = async (id: string): Promise<diag_type[]> => {
-    return await fetch(`${LINK}/users/${id}/diagnosis-and-treatment-plan`).then(res => res.json())
+    const res = await fetch(`${LINK}/usersconst res = ${id}/diagnosis-and-treatment-plan`)
+
+    if (!res.ok) {
+        throw new Error("Error fetching data")
+    }
+
+    return await res.json()
 }
