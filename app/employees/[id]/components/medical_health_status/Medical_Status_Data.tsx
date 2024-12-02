@@ -3,6 +3,7 @@
 import React from "react";
 import { IoIosCheckmarkCircle, IoIosCloseCircle } from "react-icons/io";
 import { medDATA } from "./Medical_Health_status";
+import { Button } from "@/components/ui/button";
 function Medical_Status_Data({ medData }: { medData: medDATA }) {
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -328,12 +329,7 @@ function Medical_Status_Data({ medData }: { medData: medDATA }) {
         </div>
       </div>
       <div className="flex justify-center my-10">
-        <button
-          className="px-3 py-2 rounded-md border"
-          onClick={() => console.log("hello world")}
-        >
-          Edit Record
-        </button>
+        <Button onClick={() => console.log("Edit Record")}>Edit Record</Button>
       </div>
     </div>
   );
