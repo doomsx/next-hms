@@ -153,7 +153,7 @@ export function Dialog_Component({ id }: { id: string }) {
           {/* Nurse's Note */}
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="nurseNote" className="text-right">
-              Nurse's Note
+              {"Nurse's Note"}
             </Label>
             <Textarea
               id="nurseNote"
