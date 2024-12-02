@@ -22,15 +22,18 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Dialog_Component } from "./add_dialog";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  id: string;
 }
 
 function Diag_Table<TData, TValue>({
   columns,
   data,
+  id,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -52,7 +55,7 @@ function Diag_Table<TData, TValue>({
 
   return (
     <div>
-      <div className="flex items-center py-4">
+      <div className="flex items-center py-4 justify-between">
         <Input
           placeholder="Search by diagnosis"
           value={
@@ -63,6 +66,7 @@ function Diag_Table<TData, TValue>({
           }
           className="max-w-sm"
         />
+        <Dialog_Component id={id} />
       </div>
       <div className="rounded-md border">
         <Table>

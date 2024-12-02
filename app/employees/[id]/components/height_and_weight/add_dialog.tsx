@@ -24,7 +24,8 @@ const LINK = process.env.NEXT_PUBLIC_API_LINK;
 export function Dialog_Component({ id }: { id: string }) {
   const [data, setData] = useState({
     date: "",
-    brand: "",
+    height: "",
+    weight: "",
   });
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false); // New state to control Popover visibility
@@ -45,7 +46,7 @@ export function Dialog_Component({ id }: { id: string }) {
   };
 
   const handleSubmit = async (dataID: string) => {
-    await fetch(`${LINK}/users/${dataID}/covid-vaccines`, {
+    await fetch(`${LINK}/users/${dataID}/height-and-weight`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -62,10 +63,10 @@ export function Dialog_Component({ id }: { id: string }) {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Add Covid Vaccine Data</DialogTitle>
+          <DialogTitle>Add Height and Weight Data</DialogTitle>
           <DialogDescription>
-            Add your Covid vaccine data here. Please ensure to provide the brand
-            name and date.
+            Add your height and weight data here. Please ensure to provide the
+            height, weight and date.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
@@ -89,16 +90,32 @@ export function Dialog_Component({ id }: { id: string }) {
           </div>
 
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="brand" className="text-right">
-              Brand
+            <Label htmlFor="height" className="text-right">
+              Height (vm)
             </Label>
             <Input
-              id="brand"
-              name="brand"
-              value={data.brand}
+              id="height"
+              name="height"
+              value={data.height}
               onChange={handleInputChange}
               className="col-span-3"
-              placeholder="Enter brand name"
+              placeholder="Enter height"
+              required
+            />
+          </div>
+
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="weight" className="text-right">
+              Weight (kg)
+            </Label>
+            <Input
+              id="weight"
+              name="weight"
+              value={data.weight}
+              onChange={handleInputChange}
+              className="col-span-3"
+              placeholder="Enter weight"
+              required
             />
           </div>
         </div>

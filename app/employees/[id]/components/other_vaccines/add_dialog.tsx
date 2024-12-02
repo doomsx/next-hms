@@ -25,6 +25,7 @@ export function Dialog_Component({ id }: { id: string }) {
   const [data, setData] = useState({
     date: "",
     brand: "",
+    vaccine: "",
   });
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false); // New state to control Popover visibility
@@ -45,7 +46,7 @@ export function Dialog_Component({ id }: { id: string }) {
   };
 
   const handleSubmit = async (dataID: string) => {
-    await fetch(`${LINK}/users/${dataID}/covid-vaccines`, {
+    await fetch(`${LINK}/users/${dataID}/other-vaccines`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -62,10 +63,10 @@ export function Dialog_Component({ id }: { id: string }) {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Add Covid Vaccine Data</DialogTitle>
+          <DialogTitle>Add Other Vaccine Data</DialogTitle>
           <DialogDescription>
-            Add your Covid vaccine data here. Please ensure to provide the brand
-            name and date.
+            Add your other vaccine data here. Please ensure to provide the
+            vaccine name, brand name and date.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
@@ -89,6 +90,21 @@ export function Dialog_Component({ id }: { id: string }) {
           </div>
 
           <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="vaccine" className="text-right">
+              Vaccine
+            </Label>
+            <Input
+              id="vaccine"
+              name="vaccine"
+              value={data.vaccine}
+              onChange={handleInputChange}
+              className="col-span-3"
+              placeholder="Enter vaccine name"
+              required
+            />
+          </div>
+
+          <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="brand" className="text-right">
               Brand
             </Label>
@@ -99,6 +115,7 @@ export function Dialog_Component({ id }: { id: string }) {
               onChange={handleInputChange}
               className="col-span-3"
               placeholder="Enter brand name"
+              required
             />
           </div>
         </div>

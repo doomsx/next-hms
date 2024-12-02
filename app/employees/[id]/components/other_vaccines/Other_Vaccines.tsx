@@ -11,7 +11,7 @@ const Others_Vaccine = async ({ id }: { id: string }) => {
             <h1 className="text-center text-xl md:text-2xl font-black">
                 Other Vaccines
             </h1>
-            <Others_Table columns={others} data={data} />
+            <Others_Table columns={others} data={data} id={id}/>
         </div>
     );
 };

@@ -11,7 +11,7 @@ const Diagnosis_and_Treatment_Plan = async ({ id }: { id: string }) => {
             <h1 className="text-center text-xl md:text-2xl font-black">
                 Diagnosis and Treatment Plan
             </h1>
-            <Diag_Table columns={diag} data={data} />
+            <Diag_Table columns={diag} data={data} id={id}/>
         </div>
     );
 };
