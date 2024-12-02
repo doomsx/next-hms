@@ -19,6 +19,7 @@ import {
 } from "@/components/ui/popover";
 import { format } from "date-fns";
 import { useState } from "react";
+import { Textarea } from "@/components/ui/textarea";
 const LINK = process.env.NEXT_PUBLIC_API_LINK;
 
 export function Dialog_Component({ id }: { id: string }) {
@@ -30,9 +31,12 @@ export function Dialog_Component({ id }: { id: string }) {
     nurseNote: "",
   });
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false); // New state to control Popover visibility
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false); // Loading state for submission
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setData((prev) => ({ ...prev, [name]: value }));
   };
@@ -48,14 +52,20 @@ export function Dialog_Component({ id }: { id: string }) {
   };
 
   const handleSubmit = async (dataID: string) => {
-    await fetch(`${LINK}/users/${dataID}/diagnosis-and-treatment-plan`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-
-    setIsDialogOpen(false);
-    window.location.reload();
+    setIsSubmitting(true);
+    try {
+      await fetch(`${LINK}/users/${dataID}/diagnosis-and-treatment-plan`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      setIsDialogOpen(false);
+      window.location.reload();
+    } catch (error) {
+      console.error("Error submitting data:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -72,13 +82,14 @@ export function Dialog_Component({ id }: { id: string }) {
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
+          {/* Date Input */}
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="date" className="text-right">
               Date
             </Label>
             <Popover open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
               <PopoverTrigger asChild>
-                <Button variant="outline">{data.date || "Pick a date"} </Button>
+                <Button variant="outline">{data.date || "Pick a date"}</Button>
               </PopoverTrigger>
               <PopoverContent className="p-0">
                 <Calendar
@@ -91,6 +102,7 @@ export function Dialog_Component({ id }: { id: string }) {
             </Popover>
           </div>
 
+          {/* Diagnosis */}
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="diagnosis" className="text-right">
               Diagnosis
@@ -106,11 +118,12 @@ export function Dialog_Component({ id }: { id: string }) {
             />
           </div>
 
+          {/* Diagnosis Details */}
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="diagDetails" className="text-right">
               Diagnosis Details
             </Label>
-            <Input
+            <Textarea
               id="diagDetails"
               name="diagDetails"
               value={data.diagDetails}
@@ -121,39 +134,46 @@ export function Dialog_Component({ id }: { id: string }) {
             />
           </div>
 
+          {/* Treatment Plan */}
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="treatmentPlan" className="text-right">
               Treatment Plan
             </Label>
-            <Input
+            <Textarea
               id="treatmentPlan"
               name="treatmentPlan"
               value={data.treatmentPlan}
               onChange={handleInputChange}
               className="col-span-3"
-              placeholder="Enter treatment plan "
+              placeholder="Enter treatment plan"
               required
             />
           </div>
 
+          {/* Nurse's Note */}
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="nurseNote" className="text-right">
               Nurse's Note
             </Label>
-            <Input
+            <Textarea
               id="nurseNote"
               name="nurseNote"
               value={data.nurseNote}
               onChange={handleInputChange}
               className="col-span-3"
-              placeholder="Enter nurse's note "
+              placeholder="Enter nurse's note"
               required
             />
           </div>
         </div>
+
         <DialogFooter>
-          <Button type="button" onClick={() => handleSubmit(id)}>
-            Submit
+          <Button
+            type="button"
+            onClick={() => handleSubmit(id)}
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Submitting..." : "Submit"}
           </Button>
         </DialogFooter>
       </DialogContent>
