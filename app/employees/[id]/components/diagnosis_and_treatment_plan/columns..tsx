@@ -9,6 +9,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Edit_Dialog_Component } from "./edit_dialog";
 
 export type diag_type = {
   id: number;
@@ -98,7 +99,7 @@ export const diag: ColumnDef<diag_type>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Nurse's Note
+          {"Nurse's Note"}
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -119,9 +120,7 @@ export const diag: ColumnDef<diag_type>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => console.log(`Edit ${diag.id}`)}>
-              Edit
-            </DropdownMenuItem>
+            <Edit_Dialog_Component id={diag.id} />
             <DropdownMenuItem onClick={() => console.log(`Delete ${diag.id}`)}>
               Delete
             </DropdownMenuItem>
