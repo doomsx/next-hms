@@ -2,6 +2,7 @@ import React from "react";
 import Medical_Status_Data from "./Medical_Status_Data";
 
 export type medDATA = {
+  id: string | number | undefined;
   noCondition: boolean;
   arthritis: boolean;
   asthma: boolean;
@@ -29,12 +30,12 @@ export type medDATA = {
   surgery: string;
   surgeryDesc: string;
   surgeryDate: string;
-  length: number;
 };
 
 const Medical_Health_status = ({ medData }: { medData: medDATA }) => {
-  if (!medData.length) {
+  if (!medData) {
     medData = {
+      id: undefined,
       noCondition: false,
       arthritis: false,
       asthma: false,
@@ -62,7 +63,6 @@ const Medical_Health_status = ({ medData }: { medData: medDATA }) => {
       surgery: "",
       surgeryDesc: "",
       surgeryDate: "",
-      length: 0,
     };
   }
 

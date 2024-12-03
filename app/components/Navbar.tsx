@@ -66,7 +66,7 @@ function Sidebar() {
           <div className="relative bg-gray-50">
             <Link
               href="/"
-              className="flex items-center p-2 bg-gray-50 text-gray-900 rounded-lg dark:text-white"
+              className="flex items-center p-2 bg-gray-50 text-gray-900 dark:text-white"
               onClick={toggleSidebar}
             >
               <span className="text-lg md:text-2xl px-5">
