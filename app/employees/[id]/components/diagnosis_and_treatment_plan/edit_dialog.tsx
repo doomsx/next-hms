@@ -104,7 +104,7 @@ export function Edit_Dialog_Component({ id }: { id: number }) {
         <Button
           variant="link"
           onClick={() => setIsDiaOPen(true)}
-          className="w-full"
+          className="w-full bg-blue-500 text-white"
         >
           Edit
         </Button>

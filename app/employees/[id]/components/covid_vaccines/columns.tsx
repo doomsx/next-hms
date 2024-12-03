@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Edit_Dialog_Component } from "./edit_dialog";
+import { Delete_Dialog_Component } from "./delete_dialog";
 
 export type covid_type = {
   id: number;
@@ -72,10 +73,12 @@ export const covid: ColumnDef<covid_type>[] = [
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <DropdownMenuContent align="end" className="space-y-1">
+            <DropdownMenuLabel className="text-center">
+              Actions
+            </DropdownMenuLabel>
             <Edit_Dialog_Component id={covid.id} />
-            Delete
+            <Delete_Dialog_Component id={covid.id} />
           </DropdownMenuContent>
         </DropdownMenu>
       );

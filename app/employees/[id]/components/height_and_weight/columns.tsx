@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Edit_Dialog_Component } from "./edit_dialog";
+import { Delete_Dialog_Component } from "./delete_dialog";
 
 export type haw_type = {
   id: number;
@@ -103,12 +104,12 @@ export const haw: ColumnDef<haw_type>[] = [
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+          <DropdownMenuContent align="end" className="space-y-1">
+            <DropdownMenuLabel className="text-center">
+              Actions
+            </DropdownMenuLabel>
             <Edit_Dialog_Component id={haw.id} />
-            <DropdownMenuItem onClick={() => console.log(`Delete ${haw.id}`)}>
-              Delete
-            </DropdownMenuItem>
+            <Delete_Dialog_Component id={haw.id} />
           </DropdownMenuContent>
         </DropdownMenu>
       );
