@@ -11,8 +11,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-
-
 .container {
   @apply max-w-7xl mx-auto p-3 md:p-6;
 }
@@ -27,6 +25,14 @@ body {
 
 .data-divider {
   @apply flex flex-col md:flex-row gap-2 md:gap-20 md:px-10;
+}
+
+.navLink {
+  @apply flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700;
+}
+
+.activeNavLink {
+  @apply flex items-center p-2 text-gray-900 rounded-lg bg-gray-300 dark:text-white;
 }
 
 @layer base {

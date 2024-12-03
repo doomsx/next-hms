@@ -3,8 +3,10 @@ import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import arrowleft from "@/public/arrow-left.svg";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 function Sidebar() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
 
@@ -66,7 +68,7 @@ function Sidebar() {
           <div className="relative bg-gray-50">
             <Link
               href="/"
-              className="flex items-center p-2 bg-gray-50 text-gray-900 rounded-lg dark:text-white"
+              className="flex items-center p-2 bg-gray-50 text-gray-900 dark:text-white"
               onClick={toggleSidebar}
             >
               <span className="text-lg md:text-2xl px-5">
@@ -89,7 +91,7 @@ function Sidebar() {
             <li>
               <Link
                 href="/"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                className={pathname === "/" ? "activeNavLink" : "navLink"}
                 onClick={toggleSidebar}
               >
                 <span className="ml-3 text-base md:text-lg">Home</span>
@@ -98,7 +100,9 @@ function Sidebar() {
             <li>
               <Link
                 href="/employees"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                className={
+                  pathname === "/employees" ? "activeNavLink" : "navLink"
+                }
                 onClick={toggleSidebar}
               >
                 <span className="ml-3 text-base md:text-lg">Employees</span>
@@ -107,7 +111,9 @@ function Sidebar() {
             <li>
               <Link
                 href="/vaccines"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                className={
+                  pathname === "/vaccines" ? "activeNavLink" : "navLink"
+                }
                 onClick={toggleSidebar}
               >
                 <span className="ml-3 text-base md:text-lg">Vaccines</span>
@@ -116,7 +122,9 @@ function Sidebar() {
             <li>
               <Link
                 href="/medicines"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                className={
+                  pathname === "/medicines" ? "activeNavLink" : "navLink"
+                }
                 onClick={toggleSidebar}
               >
                 <span className="ml-3 text-base md:text-lg">Medicines</span>
@@ -125,7 +133,11 @@ function Sidebar() {
             <li>
               <Link
                 href="/annual-physical-examination"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                className={
+                  pathname === "/annual-physical-examination"
+                    ? "activeNavLink"
+                    : "navLink"
+                }
                 onClick={toggleSidebar}
               >
                 <span className="ml-3 text-base md:text-lg">
@@ -136,7 +148,11 @@ function Sidebar() {
             <li>
               <Link
                 href="/influenza-vaccine"
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                className={
+                  pathname === "/influenza-vaccine"
+                    ? "activeNavLink"
+                    : "navLink"
+                }
                 onClick={toggleSidebar}
               >
                 <span className="ml-3 text-base md:text-lg">
