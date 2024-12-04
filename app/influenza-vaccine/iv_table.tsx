@@ -52,7 +52,7 @@ function Datatable<TData, TValue>({
 
   const router = useRouter();
   const handleClick = (rowData: { id: string }) => {
-    router.push(`/annual-physical-examination/${rowData.id}`);
+    router.push(`/influenza-vaccine/${rowData.id}`);
   };
 
   return (
