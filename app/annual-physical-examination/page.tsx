@@ -6,30 +6,45 @@ import { getUsers } from "@/lib/db";
 const LINK = process.env.NEXT_PUBLIC_API_LINK;
 
 async function fetchAPEData() {
-  // Fetch all users
-  const employees = await getUsers();
+  try {
+    const employees = await getUsers();
 
-  // Fetch all APE data in a single API call
-  const apeData = await fetch(`${LINK}/annual-physical-examination`).then(
-    (res) => res.json()
-  );
+    const bulkAPEData = await fetch(`${LINK}/annual-physical-examination`).then(
+      (res) => res.json()
+    );
 
-  // Create a map of user ID to APE data for faster lookup
-  const apeMap = new Map(
-    apeData.map((ape: { user_id: number }) => [ape.user_id, ape])
-  );
+    const apeMap = new Map(
+      bulkAPEData.map((ape: { user_id: number }) => [ape.user_id, ape])
+    );
 
-  // Process employee data
-  const data = employees.map((e) => ({
-    id: e.id,
-    employee_id: e.employee_id,
-    name: e.name,
-    age: e.age,
-    sex: e.sex,
-    ape: apeMap.has(e.id) ? "Yes" : "No",
-  }));
+    const data = await Promise.all(
+      employees.map(async (e) => {
+        let ape = apeMap.has(e.id);
 
-  return data;
+        if (!ape) {
+          const individualAPE = await fetch(
+            `${LINK}/users/${e.id}/annual-physical-examination`
+          )
+            .then((res) => res.json())
+            .catch(() => null);
+          ape = individualAPE && individualAPE.length > 0;
+        }
+
+        return {
+          id: e.id,
+          employee_id: e.employee_id,
+          name: e.name,
+          age: e.age,
+          sex: e.sex,
+          ape: ape ? "Yes" : "No",
+        };
+      })
+    );
+
+    return data;
+  } catch (error) {
+    throw new Error(`${error}`);
+  }
 }
 
 const Page = async () => {

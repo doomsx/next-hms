@@ -1,8 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import arrowleft from "@/public/arrow-left.svg";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 function Sidebar() {
@@ -60,15 +58,15 @@ function Sidebar() {
       {/* Sidebar */}
       <nav
         ref={sidebarRef}
-        className={`fixed top-0 left-0 z-40 w-72 h-screen transition-transform ${
+        className={`fixed top-0 left-0 z-40 w-80 h-screen transition-transform ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         <div className="z-50">
-          <div className="relative bg-gray-50">
+          <div className=" bg-gray-50">
             <Link
               href="/"
-              className="flex items-center p-2 bg-gray-50 text-gray-900 dark:text-white"
+              className="flex items-center p-2 bg-[#71F79F] text-gray-900 dark:text-white"
               onClick={toggleSidebar}
             >
               <span className="text-lg md:text-2xl px-5">
@@ -80,13 +78,11 @@ function Sidebar() {
               className={
                 !isOpen ? `hidden` : `p-5 absolute top-[-10px] right-[-50px]`
               }
-            >
-              <Image src={arrowleft} alt="arrow left" className="w-[28px]" />
-            </button>
+            ></button>
           </div>
           <hr />
         </div>
-        <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800 z-50">
+        <div className="h-full px-3 py-4 overflow-y-auto bg-[#71F79F] dark:bg-gray-800 z-50">
           <ul className="space-y-2 font-medium">
             <li>
               <Link
