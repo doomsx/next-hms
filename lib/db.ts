@@ -108,30 +108,40 @@ export const bmiConverter = (
 };
 
 export const getUsers = async (): Promise<Employees[]> => {
-  const response = await fetch(`${LINK}/users`);
+  const response = await fetch(`${LINK}/users?status_remarks=ACTIVE`);
 
   if (!response.ok) {
-    throw new Error("Error fetching data");
+    throw new Error(
+      `Error fetching data: ${response.status} ${response.statusText}`
+    );
   }
+
   const data = await response.json();
 
-  const filteredData = data.filter(
-    (data: { status_remarks: "ACTIVE" | "INACTIVE" }) =>
-      data.status_remarks === "ACTIVE"
-  );
-
-  return filteredData.map((data: Data) => {
-    return {
-      id: data.id,
-      employee_id: data.employee_id,
-      name: `${data.last_name}, ${data.first_name} ${
-        data.middle_name === "N/A" ? "" : data.middle_name
-      } ${data.name_extn === "N/A" ? "" : data.name_extn}`,
-      age: calculateAge(data.birthdate),
-      sex: data.sex,
-    };
-  });
+  return data.map((user: Data) => ({
+    id: user.id,
+    employee_id: user.employee_id,
+    name: formatName(
+      user.last_name,
+      user.first_name,
+      user.middle_name,
+      user.name_extn
+    ),
+    age: calculateAge(user.birthdate),
+    sex: user.sex,
+  }));
 };
+
+export function formatName(
+  lastName: string,
+  firstName: string,
+  middleName: string,
+  nameExtn: string
+): string {
+  return `${lastName}, ${firstName}${
+    middleName && middleName !== "N/A" ? ` ${middleName}` : ""
+  }${nameExtn && nameExtn !== "N/A" ? ` ${nameExtn}` : ""}`;
+}
 
 export const getUserID = async (id: string) => {
   const res = await fetch(`${LINK}/users/${id}`);
