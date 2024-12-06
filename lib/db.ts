@@ -170,7 +170,20 @@ export const getUserMedicalHealthStatus = async (id: string) => {
     throw new Error("Error fetching data");
   }
 
-  return await res.json();
+  const response = await res.json();
+
+  return response
+    .sort(
+      (a: { date: string }, b: { date: string }) =>
+        new Date(b.date).getTime() - new Date(a.date).getTime()
+    )
+    .map((d: { id: number; date: string; brand: string }) => {
+      return {
+        id: d.id,
+        date: d.date,
+        brand: d.brand,
+      };
+    });
 };
 
 export const getCovidVaccines = async (id: string): Promise<covid_type[]> => {
@@ -190,8 +203,23 @@ export const getOtherVaccines = async (id: string): Promise<others_type[]> => {
     throw new Error("Error fetching data");
   }
 
-  return await res.json();
+  const response = await res.json();
+
+  return response
+    .sort(
+      (a: { date: string }, b: { date: string }) =>
+        new Date(b.date).getTime() - new Date(a.date).getTime()
+    )
+    .map((d: { id: number; date: string; vaccine: string; brand: string }) => {
+      return {
+        id: d.id,
+        date: d.date,
+        vaccine: d.vaccine,
+        brand: d.brand,
+      };
+    });
 };
+
 export const getChiefComplaints = async (
   id: string
 ): Promise<complaint_type[]> => {
@@ -201,8 +229,22 @@ export const getChiefComplaints = async (
     throw new Error("Error fetching data");
   }
 
-  return await res.json();
+  const response = await res.json();
+
+  return response
+    .sort(
+      (a: { date: string }, b: { date: string }) =>
+        new Date(b.date).getTime() - new Date(a.date).getTime()
+    )
+    .map((d: { id: number; date: string; complaint: string }) => {
+      return {
+        id: d.id,
+        date: d.date,
+        complaint: d.complaint,
+      };
+    });
 };
+
 export const getVitalSigns = async (id: string): Promise<Vital[]> => {
   const res = await fetch(`${LINK}/users/${id}/vital-signs`);
 
@@ -210,7 +252,36 @@ export const getVitalSigns = async (id: string): Promise<Vital[]> => {
     throw new Error("Error fetching data");
   }
 
-  return await res.json();
+  const response = await res.json();
+
+  return response
+    .sort(
+      (a: { date: string }, b: { date: string }) =>
+        new Date(b.date).getTime() - new Date(a.date).getTime()
+    )
+    .map(
+      (d: {
+        id: number;
+        date: string;
+        heartRate: number;
+        bloodPressureSystolic: number;
+        bloodPressureDiastolic: number;
+        respiratoryRate: number;
+        temperature: number;
+        oxygensaturation: number;
+      }) => {
+        return {
+          id: d.id,
+          date: d.date,
+          heartRate: d.heartRate,
+          bloodPressureSystolic: d.bloodPressureSystolic,
+          bloodPressureDiastolic: d.bloodPressureDiastolic,
+          respiratoryRate: d.respiratoryRate,
+          temperature: d.temperature,
+          oxygensaturation: d.oxygensaturation,
+        };
+      }
+    );
 };
 
 export const getHeightAndWeight = async (
@@ -226,8 +297,12 @@ export const getHeightAndWeight = async (
 
   const response = await res.json();
 
-  return response.map(
-    (d: { id: number; date: string; height: number; weight: number }) => {
+  return response
+    .sort(
+      (a: { date: string }, b: { date: string }) =>
+        new Date(b.date).getTime() - new Date(a.date).getTime()
+    ) // Sort by date descending
+    .map((d: { id: number; date: string; height: number; weight: number }) => {
       const { bmi, classification } = bmiConverter(
         d.height,
         d.weight,
@@ -242,8 +317,46 @@ export const getHeightAndWeight = async (
         weight: d.weight,
         bmi: `${bmi} (${classification})`,
       };
-    }
+    });
+};
+
+export const getLatestHeightAndWeight = async (
+  id: string,
+  sex: string,
+  birthdate: string
+): Promise<haw_type | null> => {
+  const res = await fetch(`${LINK}/users/${id}/height-and-weight`);
+
+  if (!res.ok) {
+    throw new Error("Error Fetching Data");
+  }
+
+  const response = await res.json();
+
+  if (!response || response.length === 0) {
+    return null; // No data available
+  }
+
+  // Find the latest data by sorting by date descending and picking the first item
+  const latest = response.sort(
+    (a: { date: string }, b: { date: string }) =>
+      new Date(b.date).getTime() - new Date(a.date).getTime()
+  )[0];
+
+  const { bmi, classification } = bmiConverter(
+    latest.height,
+    latest.weight,
+    calculateAge(birthdate),
+    sex
   );
+
+  return {
+    id: latest.id,
+    date: latest.date,
+    height: latest.height,
+    weight: latest.weight,
+    bmi: `${bmi} (${classification})`,
+  };
 };
 
 export const getDiagnosisAndTreatmentPlan = async (
@@ -255,5 +368,30 @@ export const getDiagnosisAndTreatmentPlan = async (
     throw new Error("Error fetching data");
   }
 
-  return await res.json();
+  const response = await res.json();
+
+  return response
+    .sort(
+      (a: { date: string }, b: { date: string }) =>
+        new Date(b.date).getTime() - new Date(a.date).getTime()
+    )
+    .map(
+      (d: {
+        id: number;
+        date: string;
+        diagnosis: string;
+        diagDetails: string;
+        treatmentPlan: string;
+        nurseNote: string;
+      }) => {
+        return {
+          id: d.id,
+          date: d.date,
+          diagnosis: d.diagnosis,
+          diagDetails: d.diagDetails,
+          treatmentPlan: d.treatmentPlan,
+          nurseNote: d.nurseNote,
+        };
+      }
+    );
 };
