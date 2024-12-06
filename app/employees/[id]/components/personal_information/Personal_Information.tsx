@@ -1,4 +1,15 @@
 import React from "react";
+import IDG from "@/public/id-g.svg";
+import IDB from "@/public/id.svg";
+import UserG from "@/public/user-g.svg";
+import UserB from "@/public/user.svg";
+import DateLogo from "@/public/date.svg";
+import ContactPerson from "@/public/contact_person.svg";
+import Image from "next/image";
+import { FaLocationDot, FaWeightScale } from "react-icons/fa6";
+import { IoIosTime, IoMdMale, IoMdFemale } from "react-icons/io";
+import { FaPhone, FaPhoneAlt } from "react-icons/fa";
+import { GiBodyHeight, GiHeartBeats } from "react-icons/gi";
 
 type Data = {
   id: number;
@@ -142,12 +153,26 @@ const Personal_Information = ({
     <div className="space-y-3 md:space-y-10 py-3 md:py-10">
       <div className="data-divider">
         <div className="space-y-3 md:w-1/6">
-          <p className="data-title">Employee ID: </p>
+          <div className="header-group">
+            {data.sex === "MALE" || data.sex === "male" ? (
+              <Image src={IDB} alt="" height={25} width={25} />
+            ) : (
+              <Image src={IDG} alt="" height={25} width={25} />
+            )}
+            <span className="data-title">Employee ID:</span>
+          </div>
           <p className="data">{data.employee_id}</p>
         </div>
 
         <div className="space-y-3 md:w-full">
-          <p className="data-title">Name: </p>
+          <div className="header-group">
+            {data.sex === "MALE" || data.sex === "male" ? (
+              <Image src={UserB} alt="" height={25} width={25} />
+            ) : (
+              <Image src={UserG} alt="" height={25} width={25} />
+            )}
+            <p className="data-title">Name: </p>
+          </div>
           <p className="data">
             {data.last_name}, {data.first_name} {data.middle_name}{" "}
             {data.name_extn === "N/A" ? "" : data.name_extn}
@@ -156,7 +181,10 @@ const Personal_Information = ({
       </div>
 
       <div className="w-full md:px-10 space-y-3">
-        <p className="data-title">Address: </p>
+        <div className="header-group">
+          <FaLocationDot className="text-red-500 h-5 w-5" />
+          <p className="data-title">Address: </p>
+        </div>
         <p className="data">
           {`${
             data.p_house_block_lot === undefined ||
@@ -196,29 +224,48 @@ const Personal_Information = ({
 
       <div className="data-divider justify-center">
         <div className="space-y-3 md:w-1/3">
-          <p className="data-title">Birthdate: </p>
+          <div className="header-group">
+            <Image src={DateLogo} alt="" height={25} width={25} />
+            <p className="data-title">Birthdate: </p>
+          </div>
           <p className="data">{formatDate(data.birthdate)}</p>
         </div>
 
         <div className="space-y-3 md:w-1/3">
-          <p className="data-title">Age: </p>
+          <div className="header-group">
+            <IoIosTime className="text-red-400 h-5 w-5" />
+            <p className="data-title">Age: </p>
+          </div>
           <p className="data">{age} years old</p>
         </div>
 
         <div className="space-y-3 md:w-1/3">
-          <p className="data-title">Sex: </p>
+          <div className="header-group">
+            {data.sex === "MALE" || data.sex === "male" ? (
+              <IoMdMale className="text-blue-500 h-5 w-5" />
+            ) : (
+              <IoMdFemale className="text-pink-500 h-5 w-5" />
+            )}
+            <p className="data-title">Sex: </p>
+          </div>
           <p className="data">{data.sex}</p>
         </div>
       </div>
 
       <div className="data-divider">
         <div className="space-y-3 md:w-1/3">
-          <p className="data-title">Contact Number: </p>
+          <div className="header-group">
+            <FaPhone className="text-red-500 h-5 w-5" />
+            <p className="data-title">Contact Number: </p>
+          </div>
           <p className="data">{data.mobile_no}</p>
         </div>
 
         <div className="space-y-3 md:w-1/3">
-          <p className="data-title">Emergency Contact Person: </p>
+          <div className="header-group">
+            <Image src={ContactPerson} alt="" height={25} width={25} />
+            <p className="data-title text-base">Emergency Contact Person: </p>
+          </div>
           <p className="data ">
             {eData === undefined || eData.length === 0
               ? "N/A"
@@ -234,7 +281,10 @@ const Personal_Information = ({
         </div>
 
         <div className="space-y-3 md:w-1/3">
-          <p className="data-title">Emergency Contact Number: </p>
+          <div className="header-group">
+            <FaPhoneAlt className="text-green-500 h-5 w-5" />
+            <p className="data-title">Emergency Contact Number: </p>
+          </div>
           <p className="border-b w-full inline md:block">
             {eData.length === 0 ? "N/A" : eData.contact_no ?? "N/A"}
           </p>
@@ -243,17 +293,26 @@ const Personal_Information = ({
 
       <div className="data-divider justify-center">
         <div className="space-y-3 md:w-1/3">
-          <p className="data-title">Height: </p>
+          <div className="header-group">
+            <GiBodyHeight className="text-orange-500 h-5 w-5" />
+            <p className="data-title">Height: </p>
+          </div>
           <p className="data">{height} (cm)</p>
         </div>
 
         <div className="space-y-3 md:w-1/3">
-          <p className="data-title">Weight: </p>
+          <div className="header-group">
+            <FaWeightScale className="text-green-500 h-5 w-5" />
+            <p className="data-title">Weight: </p>
+          </div>
           <p className="data">{data.weight} kg</p>
         </div>
 
         <div className="space-y-3 md:w-1/3">
-          <p className="data-title">BMI: </p>
+          <div className="header-group">
+            <GiHeartBeats className="text-red-500 h-5 w-5" />
+            <p className="data-title">BMI: </p>
+          </div>
           <p className="data">{`${bmi} (${classification})`}</p>
         </div>
       </div>
