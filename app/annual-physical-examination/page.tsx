@@ -43,7 +43,8 @@ async function fetchAPEData() {
 
     return data;
   } catch (error) {
-    throw new Error(`${error}`);
+    console.error(error);
+    return [];
   }
 }
 

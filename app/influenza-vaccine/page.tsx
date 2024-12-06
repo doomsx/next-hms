@@ -6,26 +6,46 @@ import { columns } from "./columns";
 const LINK = process.env.NEXT_PUBLIC_API_LINK;
 
 async function fetchIVData() {
-  const employees = await getUsers();
+  try {
+    const employees = await getUsers();
 
-  const ivData = await fetch(`${LINK}/influenza-vaccination`).then((res) =>
-    res.json()
-  );
+    const bulkIVData = await fetch(`${LINK}/influenza-vaccination`).then(
+      (res) => res.json()
+    );
 
-  const ivMap = new Map(
-    ivData.map((iv: { user_id: number }) => [iv.user_id, iv])
-  );
+    const ivMap = new Map(
+      bulkIVData.map((iv: { user_id: number }) => [iv.user_id, iv])
+    );
 
-  const data = employees.map((e) => ({
-    id: e.id,
-    employee_id: e.employee_id,
-    name: e.name,
-    age: e.age,
-    sex: e.sex,
-    iv: ivMap.has(e.id) ? "Yes" : "No",
-  }));
+    const data = await Promise.all(
+      employees.map(async (e) => {
+        let iv = ivMap.has(e.id);
 
-  return data;
+        if (!iv) {
+          const individualIV = await fetch(
+            `${LINK}/users/${e.id}/influenza-vaccination`
+          )
+            .then((res) => res.json())
+            .catch(() => null);
+          iv = individualIV && individualIV.length > 0;
+        }
+
+        return {
+          id: e.id,
+          employee_id: e.employee_id,
+          name: e.name,
+          age: e.age,
+          sex: e.sex,
+          iv: iv ? "Yes" : "No",
+        };
+      })
+    );
+
+    return data;
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
 }
 async function page() {
   const data = await fetchIVData();
