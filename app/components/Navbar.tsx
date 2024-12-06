@@ -1,8 +1,14 @@
 "use client";
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-
+import Home from "@/public/home.svg";
+import EmployeesLogo from "@/public/employees.svg";
+import VaccineLogo from "@/public/vaccine.svg";
+import MedicineLogo from "@/public/medicines.svg";
+import ExamLogo from "@/public/exam.svg";
+import HeaderLogo from "@/public/stethoscope.svg";
 function Sidebar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
@@ -55,24 +61,24 @@ function Sidebar() {
         </svg>
       </button>
 
-      {/* Sidebar */}
       <nav
         ref={sidebarRef}
-        className={`fixed top-0 left-0 z-40 w-80 h-screen transition-transform ${
+        className={`fixed top-0 left-0 z-40 w-[330px] h-screen transition-transform bg-[#71F79F] ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         <div className="z-50">
-          <div className=" bg-gray-50">
-            <Link
-              href="/"
-              className="flex items-center p-2 bg-[#71F79F] text-gray-900 dark:text-white"
-              onClick={toggleSidebar}
-            >
-              <span className="text-lg md:text-2xl px-5">
-                Health Management System
-              </span>
-            </Link>
+          <div className="m-5 flex flex-row items-center overflow-hidden">
+            <Image
+              src={HeaderLogo}
+              alt=""
+              className="h-[50px] w-[50px] md:h-[100px] md:w-[100px]"
+            />
+            <p className="text-lg md:text-2xl px-5 flex flex-col">
+              <span>Health</span>
+              <span>Management</span>
+              <span>System</span>
+            </p>
             <button
               onClick={toggleSidebar}
               className={
@@ -80,7 +86,7 @@ function Sidebar() {
               }
             ></button>
           </div>
-          <hr />
+          <div className="border border-black h-[1px] mx-3"></div>
         </div>
         <div className="h-full px-3 py-4 overflow-y-auto bg-[#71F79F] dark:bg-gray-800 z-50">
           <ul className="space-y-2 font-medium">
@@ -90,7 +96,8 @@ function Sidebar() {
                 className={pathname === "/" ? "activeNavLink" : "navLink"}
                 onClick={toggleSidebar}
               >
-                <span className="ml-3 text-base md:text-lg">Home</span>
+                <Image src={Home} alt="" height={25} width={25} />
+                <span className="ml-3 text-base">Home</span>
               </Link>
             </li>
             <li>
@@ -101,7 +108,8 @@ function Sidebar() {
                 }
                 onClick={toggleSidebar}
               >
-                <span className="ml-3 text-base md:text-lg">Employees</span>
+                <Image src={EmployeesLogo} alt="" height={25} width={25} />
+                <span className="ml-3 text-base">Employees</span>
               </Link>
             </li>
             <li>
@@ -112,7 +120,8 @@ function Sidebar() {
                 }
                 onClick={toggleSidebar}
               >
-                <span className="ml-3 text-base md:text-lg">Vaccines</span>
+                <Image src={VaccineLogo} alt="" height={25} width={25} />
+                <span className="ml-3 text-base">Vaccines</span>
               </Link>
             </li>
             <li>
@@ -123,7 +132,8 @@ function Sidebar() {
                 }
                 onClick={toggleSidebar}
               >
-                <span className="ml-3 text-base md:text-lg">Medicines</span>
+                <Image src={MedicineLogo} alt="" height={25} width={25} />
+                <span className="ml-3 text-base">Medicines</span>
               </Link>
             </li>
             <li>
@@ -136,7 +146,8 @@ function Sidebar() {
                 }
                 onClick={toggleSidebar}
               >
-                <span className="ml-3 text-base md:text-lg">
+                <Image src={ExamLogo} alt="" height={25} width={25} />
+                <span className="ml-3 text-base">
                   Annual Physical Examination
                 </span>
               </Link>
@@ -151,9 +162,8 @@ function Sidebar() {
                 }
                 onClick={toggleSidebar}
               >
-                <span className="ml-3 text-base md:text-lg">
-                  Influenza Vaccine
-                </span>
+                <Image src={VaccineLogo} alt="" height={25} width={25} />
+                <span className="ml-3 text-base">Influenza Vaccine</span>
               </Link>
             </li>
           </ul>
@@ -163,7 +173,7 @@ function Sidebar() {
               href="/logout"
               className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
-              <span className="ml-3 text-base md:text-lg">Logout</span>
+              <span className="ml-3 text-base">Logout</span>
             </Link>
           </div>
         </div>
