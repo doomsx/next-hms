@@ -9,6 +9,7 @@ import Vital_Signs from "./components/vital_signs/Vital_Signs";
 import Height_and_Weight from "./components/height_and_weight/Height_and_Weight";
 import Diagnosis_and_Treatment_Plan from "./components/diagnosis_and_treatment_plan/Diagnosis_and_Treatment_Plan";
 import {
+  getLatestHeightAndWeight,
   getUserEmergencyContact,
   getUserID,
   getUserMedicalHealthStatus,
@@ -20,6 +21,11 @@ const page = async (props: { params: Promise<{ id: string }> }) => {
   const data = await getUserID(id);
   const eData = await getUserEmergencyContact(id);
   const medData = await getUserMedicalHealthStatus(id);
+  const latestHAW = await getLatestHeightAndWeight(
+    id,
+    data.sex,
+    data.birthdate
+  );
 
   return (
     <div>
@@ -27,7 +33,11 @@ const page = async (props: { params: Promise<{ id: string }> }) => {
         Health Status Record
       </h1>
       <section className="container mx-10 md:mx-auto space-y-5 border my-5 md:my-10 rounded-md shadow-md">
-        <Personal_Information data={data} eData={eData[0]} />
+        <Personal_Information
+          data={data}
+          eData={eData[0]}
+          latestHAW={latestHAW}
+        />
         <Separator orientation="vertical" />
         <Medical_Health_status medData={medData[0]} />
         <Separator orientation="vertical" />

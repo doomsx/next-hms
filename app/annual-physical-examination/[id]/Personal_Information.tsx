@@ -39,12 +39,20 @@ type EmergencyData = {
   contact_no: string;
 };
 
+type HAW = {
+  height: number;
+  weight: number;
+  bmi: { bmi: number; classification: string };
+};
+
 const Personal_Information = ({
   data,
   eData,
+  latestHAW,
 }: {
   data: Data;
   eData: EmergencyData;
+  latestHAW: HAW | null;
 }) => {
   if (eData === undefined) {
     eData = {
@@ -297,7 +305,7 @@ const Personal_Information = ({
             <GiBodyHeight className="text-orange-500 h-5 w-5" />
             <p className="data-title">Height: </p>
           </div>
-          <p className="data">{height} (cm)</p>
+          <p className="data">{latestHAW?.height ?? height} (cm)</p>
         </div>
 
         <div className="space-y-3 md:w-1/3">
@@ -305,7 +313,7 @@ const Personal_Information = ({
             <FaWeightScale className="text-green-500 h-5 w-5" />
             <p className="data-title">Weight: </p>
           </div>
-          <p className="data">{data.weight} kg</p>
+          <p className="data">{latestHAW?.weight ?? data.weight} kg</p>
         </div>
 
         <div className="space-y-3 md:w-1/3">
@@ -313,7 +321,9 @@ const Personal_Information = ({
             <GiHeartBeats className="text-red-500 h-5 w-5" />
             <p className="data-title">BMI: </p>
           </div>
-          <p className="data">{`${bmi} (${classification})`}</p>
+          <p className="data">{`${latestHAW?.bmi.bmi ?? bmi} (${
+            latestHAW?.bmi.classification ?? classification
+          })`}</p>
         </div>
       </div>
     </div>

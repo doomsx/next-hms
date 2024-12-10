@@ -44,6 +44,14 @@ export const calculateAge = (birthdate: string) => {
   return age;
 };
 
+export const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
+  return `${month}-${day}-${year}`;
+};
+
 export const bmiConverter = (
   height: number,
   weight: number,
@@ -193,7 +201,20 @@ export const getCovidVaccines = async (id: string): Promise<covid_type[]> => {
     throw new Error("Error fetching data");
   }
 
-  return await res.json();
+  const response = await res.json();
+
+  return response
+    .sort(
+      (a: { date: string }, b: { date: string }) =>
+        new Date(b.date).getTime() - new Date(a.date).getTime()
+    )
+    .map((d: { id: number; date: string; brand: string }) => {
+      return {
+        id: d.id,
+        date: formatDate(d.date),
+        brand: d.brand,
+      };
+    });
 };
 
 export const getOtherVaccines = async (id: string): Promise<others_type[]> => {
@@ -213,7 +234,7 @@ export const getOtherVaccines = async (id: string): Promise<others_type[]> => {
     .map((d: { id: number; date: string; vaccine: string; brand: string }) => {
       return {
         id: d.id,
-        date: d.date,
+        date: formatDate(d.date),
         vaccine: d.vaccine,
         brand: d.brand,
       };
@@ -239,7 +260,7 @@ export const getChiefComplaints = async (
     .map((d: { id: number; date: string; complaint: string }) => {
       return {
         id: d.id,
-        date: d.date,
+        date: formatDate(d.date),
         complaint: d.complaint,
       };
     });
@@ -268,17 +289,17 @@ export const getVitalSigns = async (id: string): Promise<Vital[]> => {
         bloodPressureDiastolic: number;
         respiratoryRate: number;
         temperature: number;
-        oxygensaturation: number;
+        oxygenSaturation: number;
       }) => {
         return {
           id: d.id,
-          date: d.date,
+          date: formatDate(d.date),
           heartRate: d.heartRate,
           bloodPressureSystolic: d.bloodPressureSystolic,
           bloodPressureDiastolic: d.bloodPressureDiastolic,
           respiratoryRate: d.respiratoryRate,
           temperature: d.temperature,
-          oxygensaturation: d.oxygensaturation,
+          oxygenSaturation: d.oxygenSaturation,
         };
       }
     );
@@ -312,7 +333,7 @@ export const getHeightAndWeight = async (
 
       return {
         id: d.id,
-        date: d.date,
+        date: formatDate(d.date),
         height: d.height,
         weight: d.weight,
         bmi: `${bmi} (${classification})`,
@@ -326,7 +347,7 @@ export const getLatestHeightAndWeight = async (
   birthdate: string
 ): Promise<haw_type | null> => {
   const res = await fetch(`${LINK}/users/${id}/height-and-weight`);
-
+  const data = await getUserID(id);
   if (!res.ok) {
     throw new Error("Error Fetching Data");
   }
@@ -344,8 +365,8 @@ export const getLatestHeightAndWeight = async (
   )[0];
 
   const { bmi, classification } = bmiConverter(
-    latest.height,
-    latest.weight,
+    latest.height ?? data.height,
+    latest.weight ?? data.weight,
     calculateAge(birthdate),
     sex
   );
@@ -353,8 +374,8 @@ export const getLatestHeightAndWeight = async (
   return {
     id: latest.id,
     date: latest.date,
-    height: latest.height,
-    weight: latest.weight,
+    height: latest.height ?? data.height,
+    weight: latest.weight ?? data.weight,
     bmi: `${bmi} (${classification})`,
   };
 };
@@ -386,7 +407,7 @@ export const getDiagnosisAndTreatmentPlan = async (
       }) => {
         return {
           id: d.id,
-          date: d.date,
+          date: formatDate(d.date),
           diagnosis: d.diagnosis,
           diagDetails: d.diagDetails,
           treatmentPlan: d.treatmentPlan,
