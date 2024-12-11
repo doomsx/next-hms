@@ -30,8 +30,8 @@ export default function ApeDataClient({ data }: { data: Ape[] }) {
   const filteredData = data.filter((item) => item.year === selectedYear);
 
   const handleEdit = (ape: Ape) => {
-    setSelectedApe(ape); // Set the selected record
-    setIsEditOpen(true); // Open the dialog
+    setSelectedApe(ape);
+    setIsEditOpen(true);
   };
 
   const handleSave = async (updatedApe: Ape) => {

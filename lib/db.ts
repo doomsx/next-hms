@@ -416,3 +416,27 @@ export const getDiagnosisAndTreatmentPlan = async (
       }
     );
 };
+
+export const getInfuenzaVaccinationById = async (id: string) => {
+  const res = await fetch(`${LINK}/users/${id}/influenza-vaccination`);
+
+  if (!res.ok) {
+    throw new Error("Error fetching data");
+  }
+
+  const response = await res.json();
+
+  return response
+    .sort(
+      (a: { date: string }, b: { date: string }) =>
+        new Date(b.date).getTime() - new Date(a.date).getTime()
+    )
+    .map((d: { id: number; year: string; date: string; brand: string }) => {
+      return {
+        id: d.id,
+        year: d.year,
+        date: d.date,
+        brand: d.brand,
+      };
+    });
+};
