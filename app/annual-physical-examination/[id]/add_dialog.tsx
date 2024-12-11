@@ -14,10 +14,11 @@ import { Button } from "@/components/ui/button";
 interface AddApeDialogProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (newApe: Ape) => void;
+  onSave: (newApe: Ape) => Promise<void>;
 }
 
 export interface Ape {
+  id?: number;
   year: string;
   date: string;
   urinalysis?: boolean;
@@ -90,7 +91,7 @@ const AddApeDialog: React.FC<AddApeDialogProps> = ({
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           <div className="space-y-1">
-            <div className="flex items-center">
+            <div className="flex items-center gap-1">
               <label>Year: </label>
               <Input
                 name="year"
@@ -99,7 +100,7 @@ const AddApeDialog: React.FC<AddApeDialogProps> = ({
                 onChange={handleInputChange}
               />
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center gap-1">
               <label>Date: </label>
               <Input
                 type="date"
@@ -113,82 +114,91 @@ const AddApeDialog: React.FC<AddApeDialogProps> = ({
               <input
                 type="checkbox"
                 name="urinalysis"
+                id="urinalysis"
                 checked={formData.urinalysis}
                 onChange={handleInputChange}
               />
-              <label>Urinalysis</label>
+              <label htmlFor="urinalysis">Urinalysis</label>
             </div>
             <div className="flex items-center space-x-2">
               <input
                 type="checkbox"
                 name="cbc"
+                id="cbc"
                 checked={formData.cbc}
                 onChange={handleInputChange}
               />
-              <label>CBC</label>
+              <label htmlFor="cbc">Complete Blood Count</label>
             </div>
             <div className="flex items-center space-x-2">
               <input
                 type="checkbox"
                 name="lipid_profile"
+                id="lipid_profile"
                 checked={formData.lipid_profile}
                 onChange={handleInputChange}
               />
-              <label>Lipid Profile</label>
+              <label htmlFor="lipid_profile">Lipid Profile</label>
             </div>
             <div className="flex items-center space-x-2">
               <input
                 type="checkbox"
                 name="fbs"
+                id="fbs"
                 checked={formData.fbs}
                 onChange={handleInputChange}
               />
-              <label>FBS</label>
+              <label htmlFor="fbs">Fasting Blood Sugar</label>
             </div>
             <div className="flex items-center space-x-2">
               <input
                 type="checkbox"
                 name="hba1c"
+                id="hba1c"
                 checked={formData.hba1c}
                 onChange={handleInputChange}
               />
-              <label>HbA1c</label>
+              <label htmlFor="hba1c">HbA1c</label>
             </div>
             <div className="flex items-center space-x-2">
               <input
                 type="checkbox"
                 name="bua"
+                id="bua"
                 checked={formData.bua}
                 onChange={handleInputChange}
               />
-              <label>BUA</label>
+              <label htmlFor="bua">Blood Uric Acid</label>
             </div>
             <div className="flex items-center space-x-2">
               <input
                 type="checkbox"
                 name="bun"
+                id="bun"
                 checked={formData.bun}
                 onChange={handleInputChange}
               />
-              <label>BUN</label>
+              <label htmlFor="bun">Blood Urea Nitrogen</label>
             </div>
             <div className="flex items-center space-x-2">
               <input
                 type="checkbox"
                 name="creatinine"
+                id="creatinine"
                 checked={formData.creatinine}
                 onChange={handleInputChange}
               />
-              <label>Creatinine</label>
+              <label htmlFor="creatinine">Creatinine</label>
             </div>
             <div className="flex items-center space-x-2">
               <input
                 type="checkbox"
                 name="sgot"
+                id="sgot"
                 checked={formData.sgot}
                 onChange={handleInputChange}
               />
-              <label>SGOT</label>
+              <label htmlFor="sgot">SGOT</label>
             </div>
           </div>
           <div className="space-y-1">
@@ -196,82 +206,91 @@ const AddApeDialog: React.FC<AddApeDialogProps> = ({
               <input
                 type="checkbox"
                 name="sgpt"
+                id="sgpt"
                 checked={formData.sgpt}
                 onChange={handleInputChange}
               />
-              <label>SGPT</label>
+              <label htmlFor="sgpt">SGPT</label>
             </div>
             <div className="flex items-center space-x-2">
               <input
                 type="checkbox"
                 name="chest_x_ray"
+                id="chest_x_ray"
                 checked={formData.chest_x_ray}
                 onChange={handleInputChange}
               />
-              <label>Chest X-Ray</label>
+              <label htmlFor="chest_x_ray">Chest X-Ray</label>
             </div>
             <div className="flex items-center space-x-2">
               <input
                 type="checkbox"
                 name="ecg"
+                id="ecg"
                 checked={formData.ecg}
                 onChange={handleInputChange}
               />
-              <label>ECG</label>
+              <label htmlFor="ecg">ECG</label>
             </div>
             <div className="flex items-center space-x-2">
               <input
                 type="checkbox"
                 name="wau"
+                id="wau"
                 checked={formData.wau}
                 onChange={handleInputChange}
               />
-              <label>WAU</label>
+              <label htmlFor="wau">Whole Abdominal Ultrasound</label>
             </div>
             <div className="flex items-center space-x-2">
               <input
                 type="checkbox"
                 name="pse"
+                id="pse"
                 checked={formData.pse}
                 onChange={handleInputChange}
               />
-              <label>PSE</label>
+              <label htmlFor="pse">Pap Smear Examination</label>
             </div>
             <div className="flex items-center space-x-2">
               <input
                 type="checkbox"
                 name="psa"
+                id="psa"
                 checked={formData.psa}
                 onChange={handleInputChange}
               />
-              <label>PSA</label>
+              <label htmlFor="psa">Prostate Specific Antigen</label>
             </div>
             <div className="flex items-center space-x-2">
               <input
                 type="checkbox"
                 name="breast_ultrasound"
+                id="breast_ultrasound"
                 checked={formData.breast_ultrasound}
                 onChange={handleInputChange}
               />
-              <label>Breast Ultrasound</label>
+              <label htmlFor="breast_ultrasound">Breast Ultrasound</label>
             </div>
             <div className="flex items-center space-x-2">
               <input
                 type="checkbox"
                 name="hscrp"
+                id="hscrp"
                 checked={formData.hscrp}
                 onChange={handleInputChange}
               />
-              <label>HsCRP</label>
+              <label htmlFor="hscrp">HsCRP</label>
             </div>
             <div className="flex items-center space-x-2">
               <input
                 type="checkbox"
                 name="random_drug_testing"
+                id="random_drug_testing"
                 checked={formData.random_drug_testing}
                 onChange={handleInputChange}
               />
-              <label>Random Drug Testing</label>
+              <label htmlFor="random_drug_testing">Random Drug Testing</label>
             </div>
           </div>
         </div>

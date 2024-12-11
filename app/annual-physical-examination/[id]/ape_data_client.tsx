@@ -6,11 +6,14 @@ import { IoIosCheckmarkCircle, IoIosCloseCircle } from "react-icons/io";
 import { Button } from "@/components/ui/button";
 import { useParams } from "next/navigation";
 import AddApeDialog from "./add_dialog";
+import DeleteDialog from "./delete_dialog";
 const LINK = process.env.NEXT_PUBLIC_API_LINK;
 
 export default function ApeDataClient({ data }: { data: Ape[] }) {
   const { id: id } = useParams();
   const [isAddOpen, setIsAddOpen] = useState(false);
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState<Ape | null>(null);
   const [selectedYear, setSelectedYear] = useState<string | null>(
     data.length > 0
       ? Array.from(new Set(data.map((item) => item.year))).sort((a, b) =>
@@ -67,6 +70,29 @@ export default function ApeDataClient({ data }: { data: Ape[] }) {
 
     setIsAddOpen(false); // Close the add dialog
     window.location.reload(); // Reload the page
+  };
+
+  const handleDeleteClick = (ape: Ape) => {
+    setItemToDelete(ape);
+    setIsDeleteOpen(true);
+  };
+
+  const handleDeleteConfirm = async () => {
+    if (!itemToDelete) return;
+
+    const response = await fetch(
+      `${LINK}/users/${id}/annual-physical-examination/${itemToDelete.id}`,
+      { method: "DELETE" }
+    );
+
+    if (!response.ok) {
+      console.error("Failed to delete item");
+      return;
+    }
+
+    setIsDeleteOpen(false);
+    setItemToDelete(null);
+    window.location.reload(); // Optionally, handle state update without reloading
   };
 
   return (
@@ -336,7 +362,13 @@ export default function ApeDataClient({ data }: { data: Ape[] }) {
               </div>
             </div>
 
-            <div className="flex items-end justify-end">
+            <div className="flex items-end justify-end gap-2">
+              <Button
+                variant="destructive"
+                onClick={() => handleDeleteClick(item)}
+              >
+                Delete
+              </Button>
               <Button
                 variant="default"
                 onClick={() => handleEdit(item)}
@@ -365,6 +397,15 @@ export default function ApeDataClient({ data }: { data: Ape[] }) {
           isOpen={isAddOpen}
           onClose={() => setIsAddOpen(false)}
           onSave={handleAdd}
+        />
+      )}
+
+      {isDeleteOpen && itemToDelete && (
+        <DeleteDialog
+          isOpen={isDeleteOpen}
+          onClose={() => setIsDeleteOpen(false)}
+          onDelete={handleDeleteConfirm}
+          itemName={itemToDelete.year}
         />
       )}
     </div>

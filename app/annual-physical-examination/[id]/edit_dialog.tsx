@@ -367,7 +367,11 @@ const EditApeDialog: React.FC<EditApeDialogProps> = ({
           </div>
         </div>
         <div className="mt-4 flex justify-end space-x-2">
-          <Button onClick={onClose} className="bg-gray-200 text-gray-800">
+          <Button
+            variant="outline"
+            onClick={onClose}
+            className="bg-gray-200 text-gray-800"
+          >
             Cancel
           </Button>
           <Button onClick={handleSave}>Save</Button>
