@@ -35,7 +35,7 @@ const DeleteDialog: React.FC<DeleteDialogProps> = ({
             Cancel
           </Button>
           <Button
-            variant="danger"
+            variant="destructive"
             onClick={onDelete}
             className="bg-red-500 hover:bg-red-400"
           >
