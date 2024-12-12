@@ -51,14 +51,14 @@ async function page() {
   const data = await fetchIVData();
 
   return (
-    <>
+    <section className="mt-[60px]">
       <h1 className="text-center text-2xl md:text-5xl font-bold">
         Influenza Vaccine
       </h1>
       <div className="container mx-auto py-10">
         <Datatable columns={columns} data={data} />
       </div>
-    </>
+    </section>
   );
 }
 

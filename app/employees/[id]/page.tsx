@@ -28,7 +28,7 @@ const page = async (props: { params: Promise<{ id: string }> }) => {
   );
 
   return (
-    <div>
+    <div className="mt-[60px]">
       <h1 className="text-center text-2xl md:text-5xl font-black">
         Health Status Record
       </h1>

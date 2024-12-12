@@ -3,8 +3,13 @@ import React from "react";
 
 const LoginForm = () => {
   return (
-    <div>
-      <Link href="/">Login</Link>
+    <div className="mt-10">
+      <Link
+        href="/"
+        className="text-white border px-3 py-2 hover:bg-white hover:text-black"
+      >
+        Login
+      </Link>
     </div>
   );
 };
