@@ -172,10 +172,7 @@ function Sidebar() {
           </ul>
 
           <div className="absolute bottom-1">
-            <Link
-              href="/login"
-              className="navLink"
-            >
+            <Link href="/login" className="navLink" onClick={toggleSidebar}>
               <span className="ml-3 text-base">Logout</span>
             </Link>
           </div>
