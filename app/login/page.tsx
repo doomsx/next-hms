@@ -19,7 +19,9 @@ const page = () => {
         <div className="backdrop-blur-md h-full">
           <section className={`container`}>
             <div className="flex flex-col items-center justify-center mt-10 gap-2">
-              <Image src={NiaLogo} alt="" width={200} />
+              <div className="h-[220px] w-[220px] flex items-center justify-center rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500">
+                <Image src={NiaLogo} alt="" width={200} />
+              </div>
               <p
                 className={`${TrajanProBold.className} text-3xl font-semibold text-white`}
               >
