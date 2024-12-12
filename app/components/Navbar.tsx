@@ -9,6 +9,7 @@ import VaccineLogo from "@/public/vaccine.svg";
 import MedicineLogo from "@/public/medicines.svg";
 import ExamLogo from "@/public/exam.svg";
 import HeaderLogo from "@/public/stethoscope.svg";
+import { TrajanProBold } from "../login/page";
 function Sidebar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
@@ -74,8 +75,10 @@ function Sidebar() {
               alt=""
               className="h-[50px] w-[50px] md:h-[100px] md:w-[100px]"
             />
-            <p className="text-lg md:text-2xl px-5 flex flex-col">
-              <span>Health</span>
+            <p
+              className={`${TrajanProBold.className} text-lg md:text-xl px-5 flex flex-col`}
+            >
+              <span className={TrajanProBold.className}>Health</span>
               <span>Management</span>
               <span>System</span>
             </p>
@@ -170,8 +173,8 @@ function Sidebar() {
 
           <div className="absolute bottom-1">
             <Link
-              href="/logout"
-              className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+              href="/login"
+              className="navLink"
             >
               <span className="ml-3 text-base">Logout</span>
             </Link>
