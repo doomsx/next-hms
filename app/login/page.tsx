@@ -15,22 +15,26 @@ export const TrajanProBold = localFont({
 const page = () => {
   return (
     <>
-      <div className="bg-[url('/bg.jpg')] bg-cover bg-no-repeat h-screen">
-        <div className="backdrop-blur-md h-full">
+      <div className="bg-[url('/bg.jpg')] bg-cover bg-no-repeat min-h-screen">
+        <div className="backdrop-blur-md h-screen w-screen">
           <section className={`container`}>
-            <div className="flex flex-col items-center justify-center mt-10 gap-2">
-              <div className="h-[220px] w-[220px] flex items-center justify-center rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500">
-                <Image src={NiaLogo} alt="" width={200} />
+            <div className="flex flex-col items-center justify-center gap-2">
+              <div className=" h-[170px] w-[170px] flex items-center justify-center rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 md:h-[200px] md:w-[200px] ">
+                <Image
+                  src={NiaLogo}
+                  alt=""
+                  className="w-[150px] md:w-[180px]"
+                />
               </div>
               <p
-                className={`${TrajanProBold.className} text-3xl font-semibold text-white`}
+                className={`${TrajanProBold.className} text-xl md:text-3xl font-semibold text-white`}
               >
                 Pangasinan IMO
               </p>
             </div>
-            <div className="my-3 flex flex-col justify-center items-center gap-2">
+            <div className="mt-1 flex flex-col justify-center items-center gap-2">
               <h1
-                className={`${dreamCollection.className} mt-10 text-center md:text-7xl font-bold text-white`}
+                className={`${dreamCollection.className} mt-10 text-center text-4xl md:text-7xl font-bold text-white`}
               >
                 Health Management System
               </h1>

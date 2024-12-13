@@ -43,7 +43,13 @@ function Sidebar() {
   return (
     <>
       <button
-        className={isOpen ? "hidden" : `fixed top-4 left-4 z-50`}
+        className={`${
+          pathname === "/login"
+            ? "hidden"
+            : isOpen
+            ? "hidden"
+            : `fixed top-4 left-4 z-50`
+        }`}
         onClick={toggleSidebar}
       >
         <svg
@@ -64,8 +70,12 @@ function Sidebar() {
 
       <nav
         ref={sidebarRef}
-        className={`fixed top-0 left-0 z-40 w-[330px] h-screen transition-transform bg-[#71F79F] ${
-          isOpen ? "translate-x-0" : "-translate-x-full"
+        className={`${
+          pathname === "/login"
+            ? `hidden`
+            : `fixed top-0 left-0 z-40 w-[330px] h-screen transition-transform bg-[#71F79F] ${
+                isOpen ? "translate-x-0" : "-translate-x-full"
+              }`
         }`}
       >
         <div className="z-50">
