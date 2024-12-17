@@ -15,7 +15,8 @@ export type Employees = {
 // Define columns based on Employees type
 export const columns: ColumnDef<Employees>[] = [
   {
-    accessorKey: "id", // This matches `id: string` in Employees
+    accessorFn: (row) => row.id, // This matches `id: string` in Employees
+    id: "id",
     header: ({ column }) => {
       return (
         <Button
@@ -29,7 +30,8 @@ export const columns: ColumnDef<Employees>[] = [
     },
   },
   {
-    accessorKey: "employee_id",
+    accessorFn: (row) => row.employee_id, // This matches `id: string` in Employees
+    id: "employee_id",
     header: ({ column }) => {
       return (
         <Button
@@ -43,7 +45,8 @@ export const columns: ColumnDef<Employees>[] = [
     },
   },
   {
-    accessorKey: "name",
+    accessorFn: (row) => row.name,
+    id: "name",
     header: ({ column }) => {
       return (
         <Button
@@ -57,7 +60,8 @@ export const columns: ColumnDef<Employees>[] = [
     },
   },
   {
-    accessorKey: "age",
+    accessorFn: (row) => row.age,
+    id: "age",
     header: ({ column }) => {
       return (
         <Button
@@ -71,7 +75,8 @@ export const columns: ColumnDef<Employees>[] = [
     },
   },
   {
-    accessorKey: "sex",
+    accessorFn: (row) => row.sex,
+    id: "sex",
     header: ({ column }) => {
       return (
         <Button

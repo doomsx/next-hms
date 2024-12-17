@@ -19,7 +19,7 @@ import { useParams } from "next/navigation";
 const LINK = process.env.NEXT_PUBLIC_API_LINK;
 
 interface medDATA {
-  id: string | undefined;
+  id: string | number | undefined;
   arthritis: boolean;
   asthma: boolean;
   bladderProblem: boolean;

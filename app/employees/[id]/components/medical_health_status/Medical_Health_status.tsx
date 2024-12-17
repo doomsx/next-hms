@@ -20,14 +20,14 @@ export type medDATA = {
   cancerDesc: string;
   others: boolean;
   othersDesc: string;
-  allergies: string;
+  allergies: "yes" | "no";
   foodAllergy: string;
   medicineAllergy: string;
-  maintenance: string;
+  maintenance: "yes" | "no";
   maintenanceDesc: string;
-  mentalProblem: string;
+  mentalProblem: "yes" | "no";
   mentalDesc: string;
-  surgery: string;
+  surgery: "yes" | "no";
   surgeryDesc: string;
   surgeryDate: string;
 };
@@ -53,14 +53,14 @@ const Medical_Health_status = ({ medData }: { medData: medDATA }) => {
       cancerDesc: "",
       others: false,
       othersDesc: "",
-      allergies: "",
+      allergies: "no",
       foodAllergy: "",
       medicineAllergy: "",
-      maintenance: "",
+      maintenance: "no",
       maintenanceDesc: "",
-      mentalProblem: "",
+      mentalProblem: "no",
       mentalDesc: "",
-      surgery: "",
+      surgery: "no",
       surgeryDesc: "",
       surgeryDate: "",
     };

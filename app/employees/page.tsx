@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 const Datatable = dynamic(() => import("@/app/employees/Datatable"));
-import { columns, Employees } from "@/app/employees/columns";
+import { columns} from "@/app/employees/columns";
 import { calculateAge, Data, formatName } from "@/lib/db";
 import ProtectedRoute from "../../components/ProtectedRoute";
 const LINK = process.env.NEXT_PUBLIC_API_LINK;
