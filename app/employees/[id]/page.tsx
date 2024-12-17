@@ -14,6 +14,7 @@ import {
   getUserID,
   getUserMedicalHealthStatus,
 } from "@/lib/db";
+import ProtectedRoute from "@/components/ProtectedRoute";
 
 const page = async (props: { params: Promise<{ id: string }> }) => {
   const params = await props.params;
@@ -28,32 +29,38 @@ const page = async (props: { params: Promise<{ id: string }> }) => {
   );
 
   return (
-    <div className="mt-[60px]">
-      <h1 className="text-center text-2xl md:text-5xl font-black">
-        Health Status Record
-      </h1>
-      <section className="container mx-10 md:mx-auto space-y-5 border my-5 md:my-10 rounded-md shadow-md">
-        <Personal_Information
-          data={data}
-          eData={eData[0]}
-          latestHAW={latestHAW}
-        />
-        <Separator orientation="vertical" />
-        <Medical_Health_status medData={medData[0]} />
-        <Separator orientation="vertical" />
-        <Covid_Vaccines id={id} />
-        <Separator orientation="vertical" />
-        <Other_Vaccines id={id} />
-        <Separator orientation="vertical" />
-        <Chief_Complaints id={id} />
-        <Separator orientation="vertical" />
-        <Vital_Signs id={id} />
-        <Separator orientation="vertical" />
-        <Height_and_Weight id={id} birthdate={data.birthdate} sex={data.sex} />
-        <Separator orientation="vertical" />
-        <Diagnosis_and_Treatment_Plan id={id} />
-      </section>
-    </div>
+    <ProtectedRoute>
+      <div className="mt-[60px]">
+        <h1 className="text-center text-2xl md:text-5xl font-black">
+          Health Status Record
+        </h1>
+        <section className="container mx-10 md:mx-auto space-y-5 border my-5 md:my-10 rounded-md shadow-md">
+          <Personal_Information
+            data={data}
+            eData={eData[0]}
+            latestHAW={latestHAW}
+          />
+          <Separator orientation="vertical" />
+          <Medical_Health_status medData={medData[0]} />
+          <Separator orientation="vertical" />
+          <Covid_Vaccines id={id} />
+          <Separator orientation="vertical" />
+          <Other_Vaccines id={id} />
+          <Separator orientation="vertical" />
+          <Chief_Complaints id={id} />
+          <Separator orientation="vertical" />
+          <Vital_Signs id={id} />
+          <Separator orientation="vertical" />
+          <Height_and_Weight
+            id={id}
+            birthdate={data.birthdate}
+            sex={data.sex}
+          />
+          <Separator orientation="vertical" />
+          <Diagnosis_and_Treatment_Plan id={id} />
+        </section>
+      </div>
+    </ProtectedRoute>
   );
 };
 

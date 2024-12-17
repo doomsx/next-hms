@@ -2,6 +2,7 @@ import React from "react";
 import Datatable from "./ape_table";
 import { columns } from "./columns";
 import { getUsers } from "@/lib/db";
+import ProtectedRoute from "../../components/ProtectedRoute";
 
 const LINK = process.env.NEXT_PUBLIC_API_LINK;
 
@@ -52,14 +53,16 @@ const Page = async () => {
   const data = await fetchAPEData();
 
   return (
-    <section className="mt-[60px]">
-      <h1 className="text-center text-2xl md:text-5xl font-bold">
-        Annual Physical Examination
-      </h1>
-      <div className="container mx-auto py-10">
-        <Datatable columns={columns} data={data} />
-      </div>
-    </section>
+    <ProtectedRoute>
+      <section className="mt-[60px]">
+        <h1 className="text-center text-2xl md:text-5xl font-bold">
+          Annual Physical Examination
+        </h1>
+        <div className="container mx-auto py-10">
+          <Datatable columns={columns} data={data} />
+        </div>
+      </section>
+    </ProtectedRoute>
   );
 };
 

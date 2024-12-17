@@ -1,4 +1,5 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
@@ -13,6 +14,7 @@ const loginSchema = z.object({
 });
 
 export default function Login() {
+  const router = useRouter();
   const [eId, setEId] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -59,9 +61,9 @@ export default function Login() {
       }
 
       const data = await response.json();
+      localStorage.setItem("token", data.token); // Store token securely
       setMessage("Login successful!");
-      console.log("User data:", data.user);
-      // Handle redirection or token storage here
+      router.push("/"); // Redirect to the home route
     } catch (error) {
       console.error("Error during login:", error);
       setMessage("An error occurred. Please try again later.");

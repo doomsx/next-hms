@@ -1,5 +1,5 @@
 import React from "react";
-import Footer from "../components/Footer";
+import Footer from "../../components/Footer";
 import Image from "next/image";
 import NiaLogo from "@/public/nia.png";
 import LoginForm from "./login_form";

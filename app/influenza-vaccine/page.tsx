@@ -2,6 +2,7 @@ import { getUsers } from "@/lib/db";
 import React from "react";
 import Datatable from "./iv_table";
 import { columns } from "./columns";
+import ProtectedRoute from "../../components/ProtectedRoute";
 
 const LINK = process.env.NEXT_PUBLIC_API_LINK;
 
@@ -51,14 +52,16 @@ async function page() {
   const data = await fetchIVData();
 
   return (
-    <section className="mt-[60px]">
-      <h1 className="text-center text-2xl md:text-5xl font-bold">
-        Influenza Vaccine
-      </h1>
-      <div className="container mx-auto py-10">
-        <Datatable columns={columns} data={data} />
-      </div>
-    </section>
+    <ProtectedRoute>
+      <section className="mt-[60px]">
+        <h1 className="text-center text-2xl md:text-5xl font-bold">
+          Influenza Vaccine
+        </h1>
+        <div className="container mx-auto py-10">
+          <Datatable columns={columns} data={data} />
+        </div>
+      </section>
+    </ProtectedRoute>
   );
 }
 

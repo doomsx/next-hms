@@ -9,11 +9,14 @@ import VaccineLogo from "@/public/vaccine.svg";
 import MedicineLogo from "@/public/medicines.svg";
 import ExamLogo from "@/public/exam.svg";
 import HeaderLogo from "@/public/stethoscope.svg";
-import { TrajanProBold } from "../login/page";
+import { TrajanProBold } from "../app/login/page";
+import { useRouter } from "next/navigation";
+
 function Sidebar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -26,6 +29,12 @@ function Sidebar() {
     ) {
       setIsOpen(false);
     }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+
+    router.push("/login");
   };
 
   useEffect(() => {
@@ -125,7 +134,7 @@ function Sidebar() {
                 <span className="ml-3 text-base">Employees</span>
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link
                 href="/vaccines"
                 className={
@@ -136,7 +145,7 @@ function Sidebar() {
                 <Image src={VaccineLogo} alt="" height={25} width={25} />
                 <span className="ml-3 text-base">Vaccines</span>
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link
                 href="/medicines"
@@ -182,7 +191,11 @@ function Sidebar() {
           </ul>
 
           <div className="absolute bottom-1">
-            <Link href="/login" className="navLink" onClick={toggleSidebar}>
+            <Link
+              href="/login"
+              className="navLink"
+              onClick={() => handleLogout()}
+            >
               <span className="ml-3 text-base">Logout</span>
             </Link>
           </div>
