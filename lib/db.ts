@@ -127,7 +127,7 @@ export const getUsers = async (): Promise<Employees[]> => {
   const data = await response.json();
 
   return data.map((user: Data) => ({
-    id: user.id,
+    id: user.id.toString(),
     employee_id: user.employee_id,
     name: formatName(
       user.last_name,

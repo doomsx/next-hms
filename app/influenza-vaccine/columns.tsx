@@ -5,7 +5,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 
 export type Employees = {
-  id: number;
+  id: string;
   employee_id: number;
   name: string;
   age: number;

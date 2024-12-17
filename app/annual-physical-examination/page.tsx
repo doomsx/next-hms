@@ -32,7 +32,7 @@ async function fetchAPEData() {
         }
 
         return {
-          id: e.id,
+          id: String(e.id),
           employee_id: e.employee_id,
           name: e.name,
           age: e.age,
