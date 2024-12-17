@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import EditApeDialog, { Ape } from "./edit_dialog";
+import EditApeDialog from "./edit_dialog";
+import { Ape } from "@/lib/types";
 import { IoIosCheckmarkCircle, IoIosCloseCircle } from "react-icons/io";
 import { Button } from "@/components/ui/button";
 import { useParams } from "next/navigation";

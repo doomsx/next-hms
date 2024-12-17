@@ -9,8 +9,8 @@ import VaccineLogo from "@/public/vaccine.svg";
 import MedicineLogo from "@/public/medicines.svg";
 import ExamLogo from "@/public/exam.svg";
 import HeaderLogo from "@/public/stethoscope.svg";
-import { TrajanProBold } from "../app/login/page";
 import { useRouter } from "next/navigation";
+import { TrajanProBold } from "@/app/layout";
 
 function Sidebar() {
   const pathname = usePathname();
@@ -134,18 +134,6 @@ function Sidebar() {
                 <span className="ml-3 text-base">Employees</span>
               </Link>
             </li>
-            {/* <li>
-              <Link
-                href="/vaccines"
-                className={
-                  pathname === "/vaccines" ? "activeNavLink" : "navLink"
-                }
-                onClick={toggleSidebar}
-              >
-                <Image src={VaccineLogo} alt="" height={25} width={25} />
-                <span className="ml-3 text-base">Vaccines</span>
-              </Link>
-            </li> */}
             <li>
               <Link
                 href="/medicines"

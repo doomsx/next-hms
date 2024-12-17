@@ -3,14 +3,7 @@ import Footer from "../../components/Footer";
 import Image from "next/image";
 import NiaLogo from "@/public/nia.png";
 import LoginForm from "./login_form";
-import localFont from "next/font/local";
-export const dreamCollection = localFont({
-  src: "../fonts/Dream Collection.ttf",
-});
-
-export const TrajanProBold = localFont({
-  src: "../fonts/TrajanPro-Bold.otf",
-});
+import { dreamCollection, TrajanProBold } from "../layout";
 
 const page = () => {
   return (

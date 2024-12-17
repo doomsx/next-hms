@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import localFont from "next/font/local";
@@ -7,10 +6,13 @@ export const cambria = localFont({
   src: "./fonts/Cambria.ttf",
 });
 
-export const metadata: Metadata = {
-  title: "Health Management System",
-  description: "A system storing health information",
-};
+export const dreamCollection = localFont({
+  src: "./fonts/Dream Collection.ttf",
+});
+
+export const TrajanProBold = localFont({
+  src: "./fonts/TrajanPro-Bold.otf",
+});
 
 export default function RootLayout({
   children,
@@ -20,6 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <title>Health Management System</title>
         <link rel="icon" type="image/svg+xml" href="/nia.png" />
       </head>
       <body className={`${cambria.className} antialiased`}>
