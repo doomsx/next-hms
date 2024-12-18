@@ -55,6 +55,9 @@ function Datatable<TData extends { id: string }, TValue>({
     router.push(`/influenza-vaccine/${rowData.id}`);
   };
 
+  const pageIndex = table.getState().pagination.pageIndex + 1;
+  const pageCount = table.getPageCount();
+
   return (
     <div>
       <div className="flex items-center py-4">
@@ -119,23 +122,30 @@ function Datatable<TData extends { id: string }, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          Previous
-        </Button>
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          Next
-        </Button>
+      <div className="flex items-center justify-between space-x-2 py-4">
+        <div>
+          <span>
+            Page {pageIndex} of {pageCount}
+          </span>
+        </div>
+        <div className="flex space-x-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+          >
+            Previous
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+          >
+            Next
+          </Button>
+        </div>
       </div>
     </div>
   );
