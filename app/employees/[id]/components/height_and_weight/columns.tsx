@@ -17,6 +17,7 @@ export type haw_type = {
   height: number;
   weight: number;
   bmi: { bmi: number; classification: string };
+  recommendedWeight?: string;
 };
 
 export const haw: ColumnDef<haw_type>[] = [
@@ -85,6 +86,20 @@ export const haw: ColumnDef<haw_type>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           BMI
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
+    accessorKey: "recommendedWeight",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Recommended Weight
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
