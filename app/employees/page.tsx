@@ -1,5 +1,6 @@
 import Datatable from "@/app/employees/Datatable";
 import { columns, Employees } from "@/app/employees/columns";
+import ProtectedRoute from "@/components/ProtectedRoute";
 import { calculateAge } from "@/lib/db";
 import { ColumnDef } from "@tanstack/react-table";
 
@@ -38,12 +39,16 @@ const Page = async () => {
   );
 
   return (
-    <section className="mt-[60px]">
-      <h1 className="text-center text-2xl md:text-5xl font-bold">Employees</h1>
-      <div className="container mx-auto py-10">
-        <Datatable columns={columns as ColumnDef<Employees>[]} data={data} />
-      </div>
-    </section>
+    <ProtectedRoute>
+      <section className="mt-[60px]">
+        <h1 className="text-center text-2xl md:text-5xl font-bold">
+          Employees
+        </h1>
+        <div className="container mx-auto py-10">
+          <Datatable columns={columns as ColumnDef<Employees>[]} data={data} />
+        </div>
+      </section>
+    </ProtectedRoute>
   );
 };
 
