@@ -27,7 +27,7 @@ export default function RootLayout({
       </head>
       <body className={`${cambria.className} antialiased`}>
         <Navbar />
-        <main className="">{children}</main>
+        <main>{children}</main>
       </body>
     </html>
   );

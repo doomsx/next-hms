@@ -55,6 +55,7 @@ const AddApeDialog: React.FC<AddApeDialogProps> = ({
   };
 
   const handleSubmit = () => {
+    console.log(formData);
     onSave(formData);
     onClose();
   };

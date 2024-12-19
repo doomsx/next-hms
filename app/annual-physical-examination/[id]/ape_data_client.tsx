@@ -67,9 +67,9 @@ export default function ApeDataClient({ data }: { data: Ape[] }) {
     if (!response.ok) {
       throw new Error("Failed to add Data");
     }
-
-    setIsAddOpen(false); // Close the add dialog
-    window.location.reload(); // Reload the page
+    await fetch(`${LINK}/users/${id}/annual-physical-examination`);
+    setIsAddOpen(false);
+    window.location.reload();
   };
 
   const handleDeleteClick = (ape: Ape) => {
