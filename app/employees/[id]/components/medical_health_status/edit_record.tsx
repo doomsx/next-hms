@@ -36,14 +36,14 @@ interface medDATA {
   cancerDesc: string;
   others: boolean;
   othersDesc: string;
-  allergies: "yes" | "no";
+  allergies: "yes" | "no" | undefined;
   foodAllergy: string;
   medicineAllergy: string;
-  maintenance: "yes" | "no";
+  maintenance: "yes" | "no" | undefined;
   maintenanceDesc: string;
-  mentalProblem: "yes" | "no";
+  mentalProblem: "yes" | "no" | undefined;
   mentalDesc: string;
-  surgery: "yes" | "no";
+  surgery: "yes" | "no" | undefined;
   surgeryDesc: string;
   surgeryDate: string;
 }
@@ -274,14 +274,14 @@ const EditDialog = ({ medData }: { medData: medDATA }) => {
                   <div className="space-y-2 mt-2">
                     <Input
                       placeholder="Food Allergies"
-                      value={formData.foodAllergy}
+                      value={formData.foodAllergy ?? ""}
                       onChange={(e) =>
                         handleChange("foodAllergy", e.target.value)
                       }
                     />
                     <Input
                       placeholder="Medicine Allergies"
-                      value={formData.medicineAllergy}
+                      value={formData.medicineAllergy ?? ""}
                       onChange={(e) =>
                         handleChange("medicineAllergy", e.target.value)
                       }
@@ -305,7 +305,7 @@ const EditDialog = ({ medData }: { medData: medDATA }) => {
                   <Input
                     className="mt-2"
                     placeholder="Maintenance Description"
-                    value={formData.maintenanceDesc}
+                    value={formData.maintenanceDesc ?? ""}
                     onChange={(e) =>
                       handleChange("maintenanceDesc", e.target.value)
                     }
@@ -333,7 +333,7 @@ const EditDialog = ({ medData }: { medData: medDATA }) => {
                   <Input
                     className="mt-2"
                     placeholder="Mental Problem Description"
-                    value={formData.mentalDesc}
+                    value={formData.mentalDesc ?? ""}
                     onChange={(e) => handleChange("mentalDesc", e.target.value)}
                   />
                 )}
@@ -355,7 +355,7 @@ const EditDialog = ({ medData }: { medData: medDATA }) => {
                   <div className="space-y-2 mt-2">
                     <Input
                       placeholder="Surgery Description"
-                      value={formData.surgeryDesc}
+                      value={formData.surgeryDesc ?? ""}
                       onChange={(e) =>
                         handleChange("surgeryDesc", e.target.value)
                       }
@@ -363,7 +363,7 @@ const EditDialog = ({ medData }: { medData: medDATA }) => {
                     <Input
                       type="date"
                       placeholder="Surgery Date"
-                      value={formData.surgeryDate}
+                      value={formData.surgeryDate ?? ""}
                       onChange={(e) =>
                         handleChange("surgeryDate", e.target.value)
                       }

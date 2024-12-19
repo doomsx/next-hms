@@ -36,7 +36,6 @@ export default function ApeDataClient({ data }: { data: Ape[] }) {
   };
 
   const handleSave = async (updatedApe: Ape) => {
-    console.log("Updated Ape:", updatedApe);
     const response = await fetch(
       `${LINK}/users/${id}/annual-physical-examination/${updatedApe.id}`,
       {
