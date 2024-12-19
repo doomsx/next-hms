@@ -1,17 +1,54 @@
+"use client";
+import { useEffect, useState } from "react";
 import { getUsers } from "@/lib/db";
 import ProtectedRoute from "../components/ProtectedRoute";
 import { totalMhs } from "@/lib/types";
+import { Employees } from "./employees/columns";
+import Loading from "./annual-physical-examination/loading";
 const LINK = process.env.NEXT_PUBLIC_API_LINK;
 
-export default async function Home() {
-  const data = await getUsers();
+export default function Home() {
+  const [data, setData] = useState<Employees[]>([]); // Explicitly define Employee[] as the type
+  const [mhs, setMhs] = useState([]);
+  const [apeData, setApeData] = useState([]);
+  const [ivData, setIvData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Fetch initial data
+    const fetchData = async () => {
+      try {
+        const users = await getUsers();
+        setData(users);
+
+        const mhsRes = await fetch(`${LINK}/medical-health-status`);
+        const mhsData = await mhsRes.json();
+        setMhs(mhsData);
+
+        const apeRes = await fetch(`${LINK}/annual-physical-examination`);
+        const apeResData = await apeRes.json();
+        setApeData(apeResData);
+
+        const ivRes = await fetch(`${LINK}/influenza-vaccination`);
+        const ivResData = await ivRes.json();
+        setIvData(ivResData);
+
+        setLoading(false); // Data is loaded, stop loading
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) return <Loading />;
+
   const male = data.filter((d) => d.sex.toUpperCase() === "MALE");
   const female = data.filter((d) => d.sex.toUpperCase() === "FEMALE");
-  const mhs = await fetch(`${LINK}/medical-health-status`).then((res) =>
-    res.json()
-  );
 
-  const totalMhs = mhs.filter(
+  const totalMhsCount = mhs.filter(
     (data: totalMhs) =>
       data.asthma === true ||
       data.arthritis === true ||
@@ -33,22 +70,10 @@ export default async function Home() {
       data.surgery === "yes"
   );
 
-  const apeRes = await fetch(`${LINK}/annual-physical-examination`);
-  if (!apeRes.ok) {
-    throw new Error("Failed to fetch data");
-  }
   const currentYear = new Date().getFullYear();
-  const apeData = await apeRes.json();
-
   const apeLength = apeData.filter(
     (data: { year: string }) => data.year === String(currentYear)
   );
-
-  const ivRes = await fetch(`${LINK}/influenza-vaccination`);
-  if (!ivRes.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  const ivData = await ivRes.json();
 
   const IvLength = ivData.filter(
     (data: { year: string }) => data.year === String(currentYear)
@@ -73,10 +98,10 @@ export default async function Home() {
             <span>{female.length}</span>
           </p>
         </div>
-        <div className="container mt-5 flex  justify-center items-center gap-10">
+        <div className="container mt-5 flex justify-center items-center gap-10">
           <p className="box bg-red-500 text-center">
             Employees with Medical Health Condition
-            <span>{totalMhs.length}</span>
+            <span>{totalMhsCount.length}</span>
           </p>
           <p className="box bg-yellow-500 text-center">
             Annual Physical Examination ({currentYear})

@@ -1,15 +1,17 @@
-import React from "react";
+"use client"; // Mark the component as client-side to enable React hooks
+
+import React, { useEffect, useState } from "react";
 import Datatable from "./ape_table";
 import { columns } from "./columns";
 import { getUsers } from "@/lib/db";
 import ProtectedRoute from "../../components/ProtectedRoute";
+import Loading from "./loading";
 
 const LINK = process.env.NEXT_PUBLIC_API_LINK;
 
 async function fetchAPEData() {
   try {
     const employees = await getUsers();
-
     const bulkAPEData = await fetch(`${LINK}/annual-physical-examination`).then(
       (res) => res.json()
     );
@@ -49,8 +51,31 @@ async function fetchAPEData() {
   }
 }
 
-const Page = async () => {
-  const data = await fetchAPEData();
+type data = {
+  id: string;
+  employee_id: number;
+  name: string;
+  age: number;
+  sex: string;
+  ape: string;
+};
+
+const Page = () => {
+  const [apeData, setApeData] = useState<data[]>([]); // State to store APE data
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const getData = async () => {
+      setLoading(true);
+      const data = await fetchAPEData();
+      setApeData(data);
+      setLoading(false);
+    };
+
+    getData();
+  }, []);
+
+  if (loading) return <Loading />;
 
   return (
     <ProtectedRoute>
@@ -59,7 +84,7 @@ const Page = async () => {
           Annual Physical Examination
         </h1>
         <div className="container mx-auto py-10">
-          <Datatable columns={columns} data={data} />
+          <Datatable columns={columns} data={apeData} />
         </div>
       </section>
     </ProtectedRoute>

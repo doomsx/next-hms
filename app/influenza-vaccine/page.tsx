@@ -1,15 +1,17 @@
-import { getUsers } from "@/lib/db";
-import React from "react";
+"use client"; // Mark as client-side for React hooks
+
+import React, { useState, useEffect } from "react";
 import Datatable from "./iv_table";
 import { columns } from "./columns";
+import { getUsers } from "@/lib/db";
 import ProtectedRoute from "../../components/ProtectedRoute";
+import Loading from "./loading";
 
 const LINK = process.env.NEXT_PUBLIC_API_LINK;
 
 async function fetchIVData() {
   try {
     const employees = await getUsers();
-
     const bulkIVData = await fetch(`${LINK}/influenza-vaccination`).then(
       (res) => res.json()
     );
@@ -48,8 +50,32 @@ async function fetchIVData() {
     return [];
   }
 }
-async function page() {
-  const data = await fetchIVData();
+
+type fetchedData = {
+  id: string;
+  employee_id: number;
+  name: string;
+  age: number;
+  sex: string;
+  iv: string;
+};
+const Page = () => {
+  const [data, setData] = useState<fetchedData[]>([]); // Use state to store the data
+  const [loading, setLoading] = useState(true);
+
+  // Fetch the data when the component mounts
+  useEffect(() => {
+    const getData = async () => {
+      setLoading(true); // Show loading message while fetching data
+      const fetchedData = await fetchIVData();
+      setData(fetchedData); // Update state with fetched data
+      setLoading(false); // Stop loading once data is fetched
+    };
+
+    getData();
+  }, []); // Empty array ensures this runs once on component mount
+
+  if (loading) return <Loading />; // Show loading message while data is being fetched
 
   return (
     <ProtectedRoute>
@@ -63,6 +89,6 @@ async function page() {
       </section>
     </ProtectedRoute>
   );
-}
+};
 
-export default page;
+export default Page;
