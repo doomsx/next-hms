@@ -28,6 +28,8 @@ const page = async (props: { params: Promise<{ id: string }> }) => {
     data.birthdate
   );
 
+  console.log(medData);
+
   return (
     <ProtectedRoute>
       <div className="mt-[60px]">

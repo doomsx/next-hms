@@ -21,3 +21,63 @@ export interface Ape {
   hscrp: boolean;
   random_drug_testing: boolean;
 }
+
+export interface MHS {
+  id: number;
+  noCondition: boolean;
+  arthritis: boolean;
+  asthma: boolean;
+  bladderProblem: boolean;
+  diabetes: boolean;
+  heartProblem: boolean;
+  hepatitis: boolean;
+  hiv: boolean;
+  hypertension: boolean;
+  kidneyProblem: boolean;
+  liverProblem: boolean;
+  thyroid: boolean;
+  tuberculosis: boolean;
+  cancer: boolean;
+  cancerDesc: string;
+  others: boolean;
+  othersDesc: string;
+  allergies: string;
+  foodAllergy: string;
+  medicineAllergy: string;
+  maintenance: string;
+  maintenanceDesc: string;
+  mentalProblem: string;
+  mentalDesc: string;
+  surgery: string;
+  surgeryDesc: string;
+  surgeryDate: string;
+}
+
+export type totalMhs = {
+  arthritis: boolean;
+  asthma: boolean;
+  bladderProblem: boolean;
+  diabetes: boolean;
+  heartProblem: boolean;
+  hepatitis: boolean;
+  hiv: boolean;
+  hypertension: boolean;
+  kidneyProblem: boolean;
+  liverProblem: boolean;
+  thyroid: boolean;
+  tuberculosis: boolean;
+  cancer: boolean;
+  cancerDesc: string;
+  others: boolean;
+  othersDesc: string;
+  allergies: "yes" | "no";
+  foodAllergy: string;
+  medicineAllergy: string;
+  maintenance: "yes" | "no";
+  maintenanceDesc: string;
+  mentalProblem: "yes" | "no";
+  mentalDesc: string;
+  surgery: "yes" | "no";
+  surgeryDesc: string;
+  surgeryDate: string;
+};

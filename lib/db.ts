@@ -5,6 +5,7 @@ import { diag_type } from "@/app/employees/[id]/components/diagnosis_and_treatme
 import { haw_type } from "@/app/employees/[id]/components/height_and_weight/columns";
 import { others_type } from "@/app/employees/[id]/components/other_vaccines/columns";
 import { Employees } from "@/app/employees/columns";
+import { MHS } from "./types";
 
 type Vital = {
   id: number;
@@ -180,18 +181,38 @@ export const getUserMedicalHealthStatus = async (id: string) => {
 
   const response = await res.json();
 
-  return response
-    .sort(
-      (a: { date: string }, b: { date: string }) =>
-        new Date(b.date).getTime() - new Date(a.date).getTime()
-    )
-    .map((d: { id: number; date: string; brand: string }) => {
-      return {
-        id: d.id,
-        date: d.date,
-        brand: d.brand,
-      };
-    });
+  return response.map((d: MHS) => {
+    return {
+      id: d.id,
+      noCondition: d.noCondition,
+      arthritis: d.arthritis,
+      asthma: d.asthma,
+      bladderProblem: d.bladderProblem,
+      diabetes: d.diabetes,
+      heartProblem: d.heartProblem,
+      hepatitis: d.hepatitis,
+      hiv: d.hiv,
+      hypertension: d.hypertension,
+      kidneyProblem: d.kidneyProblem,
+      liverProblem: d.liverProblem,
+      thyroid: d.thyroid,
+      tuberculosis: d.tuberculosis,
+      cancer: d.cancer,
+      cancerDesc: d.cancerDesc,
+      others: d.others,
+      othersDesc: d.othersDesc,
+      allergies: d.allergies,
+      foodAllergy: d.foodAllergy,
+      medicineAllergy: d.medicineAllergy,
+      maintenance: d.maintenance,
+      maintenanceDesc: d.maintenanceDesc,
+      mentalProblem: d.mentalProblem,
+      mentalDesc: d.mentalDesc,
+      surgery: d.surgery,
+      surgeryDesc: d.surgeryDesc,
+      surgeryDate: d.surgeryDate,
+    };
+  });
 };
 
 export const getCovidVaccines = async (id: string): Promise<covid_type[]> => {

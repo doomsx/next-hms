@@ -12,7 +12,7 @@ function Medical_Status_Data({ medData }: { medData: medDATA }) {
     const year = date.getFullYear();
     return `${month}-${day}-${year}`;
   };
-
+  
   return (
     <div>
       <div className="mt-5 md:px-10">

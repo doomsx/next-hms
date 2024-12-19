@@ -1,5 +1,6 @@
 import { getUsers } from "@/lib/db";
 import ProtectedRoute from "../components/ProtectedRoute";
+import { totalMhs } from "@/lib/types";
 const LINK = process.env.NEXT_PUBLIC_API_LINK;
 
 export default async function Home() {
@@ -8,6 +9,28 @@ export default async function Home() {
   const female = data.filter((d) => d.sex.toUpperCase() === "FEMALE");
   const mhs = await fetch(`${LINK}/medical-health-status`).then((res) =>
     res.json()
+  );
+
+  const totalMhs = mhs.filter(
+    (data: totalMhs) =>
+      data.asthma === true ||
+      data.arthritis === true ||
+      data.bladderProblem === true ||
+      data.diabetes === true ||
+      data.heartProblem === true ||
+      data.hepatitis === true ||
+      data.hiv === true ||
+      data.hypertension === true ||
+      data.kidneyProblem === true ||
+      data.liverProblem === true ||
+      data.thyroid === true ||
+      data.tuberculosis === true ||
+      data.cancer === true ||
+      data.others === true ||
+      data.allergies === "yes" ||
+      data.maintenance === "yes" ||
+      data.mentalProblem === "yes" ||
+      data.surgery === "yes"
   );
 
   const apeRes = await fetch(`${LINK}/annual-physical-examination`);
@@ -53,7 +76,7 @@ export default async function Home() {
         <div className="container mt-5 flex  justify-center items-center gap-10">
           <p className="box bg-red-500 text-center">
             Employees with Medical Health Condition
-            <span>{mhs.length}</span>
+            <span>{totalMhs.length}</span>
           </p>
           <p className="box bg-yellow-500 text-center">
             Annual Physical Examination ({currentYear})
