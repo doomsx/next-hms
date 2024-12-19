@@ -30,6 +30,8 @@ type Data = {
   mobile_no: string;
   height: number;
   weight: number;
+  blood_type: string;
+  civil_status: string;
 };
 
 type EmergencyData = {
@@ -188,18 +190,19 @@ const Personal_Information = ({
         </div>
       </div>
 
-      <div className="w-full md:px-10 space-y-3">
-        <div className="header-group">
-          <FaLocationDot className="text-red-500 h-5 w-5" />
-          <p className="data-title">Address: </p>
-        </div>
-        <p className="data">
-          {`${
-            data.p_house_block_lot === undefined ||
-            data.p_house_block_lot === "N/A"
-              ? ""
-              : data.p_house_block_lot
-          } 
+      <div className="data-divider justify-center">
+        <div className="space-y-3 md:w-1/3">
+          <div className="header-group">
+            <FaLocationDot className="text-red-500 h-5 w-5" />
+            <p className="data-title">Address: </p>
+          </div>
+          <p className="data">
+            {`${
+              data.p_house_block_lot === undefined ||
+              data.p_house_block_lot === "N/A"
+                ? ""
+                : data.p_house_block_lot
+            } 
           ${
             data.p_street === "N/A" || data.p_street === undefined
               ? ""
@@ -227,7 +230,19 @@ const Personal_Information = ({
               ? ""
               : data.p_province
           }`}
-        </p>
+          </p>
+        </div>
+        <div className="space-y-3 md:w-1/3">
+          <div className="header-group">
+            <span>Blood Type:</span>
+          </div>
+          <p className="data">{data.blood_type}</p>
+        </div>
+
+        <div className="space-y-3 md:w-1/3">
+          <div className="header-group">Civil Status</div>
+          <p className="data">{data.civil_status}</p>
+        </div>
       </div>
 
       <div className="data-divider justify-center">
