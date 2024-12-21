@@ -3,14 +3,8 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
+import { Employees } from "@/lib/types";
 
-export type Employees = {
-    id: string;
-    employee_id: number;
-    name: string;
-    age: number;
-    sex: string;
-};
 
 export const columns: ColumnDef<Employees>[] = [
     {
