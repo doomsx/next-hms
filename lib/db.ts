@@ -1,10 +1,8 @@
 const LINK = process.env.NEXT_PUBLIC_API_LINK;
 import { complaint_type } from "@/app/employees/[id]/components/chief_complaints/columns";
-import { covid_type } from "@/app/employees/[id]/components/covid_vaccines/columns";
 import { diag_type } from "@/app/employees/[id]/components/diagnosis_and_treatment_plan/columns.";
 import { haw_type } from "@/app/employees/[id]/components/height_and_weight/columns";
-import { others_type } from "@/app/employees/[id]/components/other_vaccines/columns";
-import { Data, Employees, MHS, Vital } from "./types";
+import { covid_type, Data, Employees, MHS, others_type, Vital } from "./types";
 
 export const calculateAge = (birthdate: string) => {
     const today = new Date();

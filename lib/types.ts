@@ -162,3 +162,49 @@ export type covid_type = {
     date: string;
     brand: string;
 };
+
+export type others_type = {
+    id: number;
+    date: string;
+    vaccine: string;
+    brand: string;
+};
+
+export type PersonalInformation = {
+    id: number;
+    employee_id: number;
+    first_name: string;
+    last_name: string;
+    middle_name: string;
+    name_extn: string;
+    birthdate: string;
+    p_house_block_lot: string;
+    p_street: string;
+    p_subdivision_village: string;
+    p_barangay: string;
+    p_city_municipality: string;
+    p_province: string;
+    age: number;
+    sex: string;
+    mobile_no: string;
+    height: number;
+    weight: number;
+    blood_type: string;
+    civil_status: string;
+};
+
+export type EmergencyData = {
+    length?: number;
+    fullname: string;
+    relationship: string;
+    contact_no: string;
+};
+
+export type HAW = {
+    height: number;
+    weight: number;
+    bmi: {
+        bmi: number;
+        classification: string;
+    };
+};
