@@ -1,6 +1,5 @@
 const LINK = process.env.NEXT_PUBLIC_API_LINK;
 import { complaint_type } from "@/app/employees/[id]/components/chief_complaints/columns";
-import { diag_type } from "@/app/employees/[id]/components/diagnosis_and_treatment_plan/columns.";
 import { haw_type } from "@/app/employees/[id]/components/height_and_weight/columns";
 import { covid_type, Data, Employees, MHS, others_type, Vital } from "./types";
 

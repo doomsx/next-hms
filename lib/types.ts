@@ -208,3 +208,18 @@ export type HAW = {
         classification: string;
     };
 };
+
+export type diag_type = {
+    id: number;
+    date: string;
+    diagnosis: string;
+    diagDetails: string;
+    treatmentPlan: string;
+    nurseNote: string;
+};
+
+export type complaint_type = {
+    id: number;
+    complaint: string;
+    date: string;
+};
